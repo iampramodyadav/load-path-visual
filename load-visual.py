@@ -68,6 +68,7 @@ node_properties = html.Div([
 graph_builder = html.Div([
     html.H3("Interactive Graph Builder"),
     html.Button("Add Node", id='add-node-btn', n_clicks=0),
+    html.Button("Delete Selected Node", id='delete-node-btn', n_clicks=0, style={'margin-left': '10px'}),
     html.Div(id='click-data'),
     html.Div(id='connection-list'),
     html.Div([
@@ -139,6 +140,8 @@ app.layout = html.Div([
     dcc.Store(id='node-positions', data={}),
     # Store for downloaded JSON
     dcc.Download(id='download-json'),
+    # Store for selected node
+    dcc.Store(id='selected-node', data=None),
     
     html.H1("Interactive Graph Builder", style={'textAlign': 'center'}),
     
@@ -184,6 +187,14 @@ app.layout = html.Div([
                             'target-arrow-shape': 'triangle',
                             'curve-style': 'bezier'
                         }
+                    },
+                    {
+                        'selector': 'node:selected',
+                        'style': {
+                            'border-width': '3px',
+                            'border-color': '#333',
+                            'border-style': 'solid'
+                        }
                     }
                 ]
             ),
@@ -216,8 +227,15 @@ app.layout = html.Div([
 def add_node(n_clicks, data):
     if not n_clicks:
         return dash.no_update
+    
+    # Generate a unique node ID that doesn't already exist
+    existing_ids = [node['data']['id'] for node in data['nodes']]
+    node_id = None
+    counter = 0
+    while node_id is None or node_id in existing_ids:
+        node_id = f'n{counter}'
+        counter += 1
         
-    node_id = f'n{len(data["nodes"])}'
     colors = ['#FF4136', '#2ECC40', '#0074D9', '#FF851B', '#B10DC9']
     
     # Random position for button click
@@ -240,6 +258,41 @@ def add_node(n_clicks, data):
         'position': {'x': pos_x, 'y': pos_y}
     })
     return data
+
+# Store selected node
+@app.callback(
+    Output('selected-node', 'data'),
+    Input('cytoscape', 'tapNodeData')
+)
+def store_selected_node(node_data):
+    if node_data:
+        return node_data['id']
+    return None
+
+# Callback to delete selected node
+@app.callback(
+    [Output('graph-data', 'data', allow_duplicate=True),
+     Output('click-data', 'children', allow_duplicate=True)],
+    Input('delete-node-btn', 'n_clicks'),
+    State('selected-node', 'data'),
+    State('graph-data', 'data'),
+    prevent_initial_call=True
+)
+def delete_node(n_clicks, selected_node_id, graph_data):
+    if not n_clicks or not selected_node_id:
+        return dash.no_update, dash.no_update
+    
+    # Remove the node
+    graph_data['nodes'] = [node for node in graph_data['nodes'] 
+                          if node['data']['id'] != selected_node_id]
+    
+    # Remove any edges connected to this node
+    graph_data['edges'] = [edge for edge in graph_data['edges'] 
+                          if edge['data']['source'] != selected_node_id and 
+                             edge['data']['target'] != selected_node_id]
+    
+    # Reset the click state to avoid connection issues
+    return graph_data, "Click a node to start new connection."
 
 # Callback to update cytoscape with stored data while preserving positions
 @app.callback(
@@ -265,8 +318,13 @@ def update_cytoscape(data, current_elements):
             node_copy['position'] = current_positions[node_id]
         elements.append(node_copy)
     
-    # Add edges
-    elements.extend(data['edges'])
+    # Add edges - only if both source and target nodes exist
+    node_ids = {node['data']['id'] for node in data['nodes']}
+    for edge in data['edges']:
+        source = edge['data']['source']
+        target = edge['data']['target']
+        if source in node_ids and target in node_ids:
+            elements.append(edge)
     
     return elements
 
@@ -302,10 +360,35 @@ def handle_node_click(node_data, click_state, graph_data):
         
     clicked_node = node_data['id']
     
+    # Verify the clicked node exists in the graph data
+    node_exists = any(node['data']['id'] == clicked_node for node in graph_data['nodes'])
+    if not node_exists:
+        return graph_data, "Node no longer exists. Click a valid node."
+    
     if not click_state or 'First node:' not in click_state:
         return graph_data, f"First node: {clicked_node}. Click another node to create connection."
     else:
         first_node = click_state.split(': ')[1].split('.')[0]
+        
+        # Verify first node still exists
+        first_node_exists = any(node['data']['id'] == first_node for node in graph_data['nodes'])
+        if not first_node_exists:
+            return graph_data, f"First node no longer exists. New first node: {clicked_node}. Click another node to create connection."
+        
+        # Don't create self-loops
+        if first_node == clicked_node:
+            return graph_data, f"Cannot connect a node to itself. First node: {clicked_node}. Click another node to create connection."
+        
+        # Check if this edge already exists
+        edge_exists = any(
+            (edge['data']['source'] == first_node and edge['data']['target'] == clicked_node) or
+            (edge['data']['source'] == clicked_node and edge['data']['target'] == first_node)
+            for edge in graph_data['edges']
+        )
+        
+        if edge_exists:
+            return graph_data, f"Connection already exists. First node: {clicked_node}. Click another node to create connection."
+        
         edge_id = f'e{len(graph_data["edges"])}'
         
         graph_data['edges'].append({
