@@ -1,3 +1,11 @@
+"""
+@Author:    Pramod Kumar Yadav
+@email:     pkyadav01234@gmail.com
+@Date:      Feb, 2023
+@status:    development
+@PythonVersion: python3
+"""
+
 import dash
 from dash import html, dcc, Input, Output, State, dash_table
 import dash_cytoscape as cyto
@@ -15,34 +23,38 @@ node_properties = html.Div([
         options=[]
     ),
     dcc.Input(id='node-name-input', placeholder='Node Name'),
-    dcc.Input(id='node-mass-input', type='number', placeholder='Mass (kg)', value=0),
-    
+
+    html.Div([
+        html.Label("Mass in Kg:"),
+        dcc.Input(id='node-mass-input', type='number', placeholder='Mass (kg)', value=0, style={'width': '50px'}),
+    ]),
+
     html.Div([
         html.Label("Center of Gravity in Global Frame (x,y,z):"),
-        dcc.Input(id='node-cog-x-input', type='number', placeholder='X', value=0),
-        dcc.Input(id='node-cog-y-input', type='number', placeholder='Y', value=0), 
-        dcc.Input(id='node-cog-z-input', type='number', placeholder='Z', value=0)
+        dcc.Input(id='node-cog-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-cog-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}), 
+        dcc.Input(id='node-cog-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
     ]),
-    
+    html.Hr(),
     html.Div([
         html.Label("External Force in Local Frame (x,y,z):"),
-        dcc.Input(id='node-force-x-input', type='number', placeholder='X', value=0),
-        dcc.Input(id='node-force-y-input', type='number', placeholder='Y', value=0),
-        dcc.Input(id='node-force-z-input', type='number', placeholder='Z', value=0)
+        dcc.Input(id='node-force-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-force-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-force-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
     ]),
     
     html.Div([
         html.Label("Moment in Local Frame (x,y,z):"),
-        dcc.Input(id='node-moment-x-input', type='number', placeholder='X', value=0),
-        dcc.Input(id='node-moment-y-input', type='number', placeholder='Y', value=0),
-        dcc.Input(id='node-moment-z-input', type='number', placeholder='Z', value=0)
+        dcc.Input(id='node-moment-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-moment-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-moment-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
     ]),
     
     html.Div([
         html.Label("Euler Angles (x,y,z) in degrees:"),
-        dcc.Input(id='node-euler-x-input', type='number', placeholder='X', value=0),
-        dcc.Input(id='node-euler-y-input', type='number', placeholder='Y', value=0),
-        dcc.Input(id='node-euler-z-input', type='number', placeholder='Z', value=0),
+        dcc.Input(id='node-euler-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-euler-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-euler-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'}),
         dcc.Dropdown(
             id='rotation-order',
             options=[
@@ -62,7 +74,7 @@ node_properties = html.Div([
     ]),
     
     html.Button('Update Node', id='update-node-btn')
-], style={'padding': '10px', 'border': '1px solid black'})
+], style={'padding': '10px','borderRadius': '10px',  'border': '1px solid black'})
 
 # Interactive Graph Builder controls
 graph_builder = html.Div([
@@ -90,11 +102,11 @@ graph_builder = html.Div([
         ),
         html.Div(id='json-output')
     ], style={'margin-top': '20px'})
-], style={'padding': '10px', 'border': '1px solid black', 'margin-top': '10px'})
+], style={'padding': '10px', 'border': '1px solid black', 'borderRadius': '10px', 'margin-top': '10px'})
 
 # Node properties table
 node_properties_table = html.Div([
-    html.H3("Node Properties Table"),
+    #html.H3("Node Properties Table"),
     dash_table.DataTable(
         id='node-properties-table',
         columns=[
@@ -131,7 +143,14 @@ node_properties_table = html.Div([
             'fontWeight': 'bold'
         }
     )
-], style={'padding': '10px', 'border': '1px solid black', 'margin-top': '10px'})
+], style={
+    #'padding': '10px', 'border': '1px solid black', 'margin-top': '10px',
+    'height': '20%',
+    'marginTop': '10px', 
+    'padding': '10px', 
+    'borderRadius': '10px',
+    'backgroundColor': '#f9f9f9'
+    })
 
 app.layout = html.Div([
     # Store for graph data
@@ -154,10 +173,20 @@ app.layout = html.Div([
             # Bottom: Interactive Graph Builder
             graph_builder
         ], style={
-            'gridArea': 'sidebar',
-            'padding': '10px',
-            'overflowY': 'auto',
-            'maxHeight': 'calc(100vh - 100px)'
+            #'backgroundColor': '#ecf0f1',
+            #'height': '85vh',
+            #'gridArea': 'sidebar',
+            #'padding': '10px',
+            #'overflowY': 'auto',
+            #'maxHeight': 'calc(100vh - 100px)'
+            'width': '25%', 
+            'padding': '15px',
+            'borderRadius': '10px',
+            'backgroundColor': '#ecf0f1',
+            'boxShadow': '2px 2px 10px rgba(0,0,0,0.1)',
+            'height': '80vh',
+            # 'height': '100%',
+            'overflowY': 'auto'
         }),
         
         # Right plot area
@@ -166,7 +195,15 @@ app.layout = html.Div([
             cyto.Cytoscape(
                 id='cytoscape',
                 layout={'name': 'preset'},
-                style={'width': '100%', 'height': '800px'},
+                style={
+                    #'width': '100%', 
+                    #'height': '800px',
+                    'height': '80%', 
+                    'borderRadius': '10px', 
+                    'boxShadow': '2px 2px 15px rgba(0,0,0,0.2)',
+                    'backgroundColor': 'white',
+                    'padding': '10px'
+                    },
                 elements=[],
                 stylesheet=[
                     {
@@ -201,20 +238,25 @@ app.layout = html.Div([
             # Node properties table below the plot
             node_properties_table
         ], style={
-            'gridArea': 'main',
-            'padding': '10px',
-            'backgroundColor': '#f8f9fa',
-            'borderRadius': '5px',
-            'boxShadow': '0 0 10px rgba(0,0,0,0.1)',
-            'overflowY': 'auto'
+            'width': '75%', 'height': '80vh',
+            #'gridArea': 'main',
+            #'padding': '10px',
+            #'backgroundColor': '#f8f9fa',
+            #'borderRadius': '5px',
+            #'boxShadow': '0 0 10px rgba(0,0,0,0.1)',
+            #'overflowY': 'auto'
         })
     ], style={
-        'display': 'grid',
-        'gridTemplateColumns': '300px 1fr',
-        'gridTemplateAreas': '"sidebar main"',
-        'gap': '10px',
-        'height': 'calc(100vh - 100px)',
-        'width': '100%'
+        'display': 'flex', 
+        'justifyContent': 'space-between', 
+        'gap': '20px', 
+        'padding': '20px',
+        #'display': 'grid',
+        #'gridTemplateColumns': '300px 1fr',
+        #'gridTemplateAreas': '"sidebar main"',
+        #'gap': '10px',
+        #'height': 'calc(100vh - 100px)',
+        #'width': '100%'
     })
 ])
 
@@ -569,4 +611,4 @@ def import_json(contents, filename):
         return dash.no_update, html.Div(f"Error processing file: {str(e)}", style={'color': 'red'})
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(port=r'8051', debug=True)
