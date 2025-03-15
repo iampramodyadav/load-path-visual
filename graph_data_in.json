@@ -1,0 +1,314 @@
+{
+  "nodes": [
+    {
+      "data": {
+        "id": "n0",
+        "name": "hu",
+        "color": "#0074D9",
+        "mass": 0,
+        "cog": [
+          0,
+          0,
+          0
+        ],
+        "external_force": [
+          0,
+          0,
+          0
+        ],
+        "moment": [
+          0,
+          0,
+          0
+        ],
+        "euler_angles": [
+          0,
+          0,
+          0
+        ],
+        "rotation_order": "xyz",
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "position": {
+        "x": 332.78529093598905,
+        "y": 264.064461414145
+      }
+    },
+    {
+      "data": {
+        "id": "n1",
+        "name": "b1",
+        "color": "#FF4136",
+        "mass": 0,
+        "cog": [
+          0,
+          0,
+          0
+        ],
+        "external_force": [
+          0,
+          0,
+          0
+        ],
+        "moment": [
+          0,
+          0,
+          0
+        ],
+        "euler_angles": [
+          0,
+          0,
+          0
+        ],
+        "rotation_order": "xyz",
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "position": {
+        "x": 480.6247062941269,
+        "y": 147.10678731300416
+      }
+    },
+    {
+      "data": {
+        "id": "n2",
+        "name": "b2",
+        "color": "#FF851B",
+        "mass": 0,
+        "cog": [
+          0,
+          0,
+          0
+        ],
+        "external_force": [
+          0,
+          0,
+          0
+        ],
+        "moment": [
+          0,
+          0,
+          0
+        ],
+        "euler_angles": [
+          0,
+          0,
+          0
+        ],
+        "rotation_order": "xyz",
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "position": {
+        "x": 517.0596428240716,
+        "y": 393.28976283284396
+      }
+    },
+    {
+      "data": {
+        "id": "n3",
+        "name": "b3",
+        "color": "#B10DC9",
+        "mass": 0,
+        "cog": [
+          0,
+          0,
+          0
+        ],
+        "external_force": [
+          0,
+          0,
+          0
+        ],
+        "moment": [
+          0,
+          0,
+          0
+        ],
+        "euler_angles": [
+          0,
+          0,
+          0
+        ],
+        "rotation_order": "xyz",
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "position": {
+        "x": 537.3661586384939,
+        "y": 282.6022358989902
+      }
+    },
+    {
+      "data": {
+        "id": "n4",
+        "name": "ms",
+        "color": "#B10DC9",
+        "mass": 0,
+        "cog": [
+          0,
+          0,
+          0
+        ],
+        "external_force": [
+          0,
+          0,
+          0
+        ],
+        "moment": [
+          0,
+          0,
+          0
+        ],
+        "euler_angles": [
+          0,
+          0,
+          0
+        ],
+        "rotation_order": "xyz",
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "position": {
+        "x": 153.90998972409312,
+        "y": 257.68890595649225
+      }
+    },
+    {
+      "data": {
+        "id": "n5",
+        "name": "be",
+        "color": "#0074D9",
+        "mass": 0,
+        "cog": [
+          0,
+          0,
+          0
+        ],
+        "external_force": [
+          0,
+          0,
+          0
+        ],
+        "moment": [
+          0,
+          0,
+          0
+        ],
+        "euler_angles": [
+          0,
+          0,
+          0
+        ],
+        "rotation_order": "xyz",
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "position": {
+        "x": -12.172238667566498,
+        "y": 255.65800818106857
+      }
+    },
+    {
+      "data": {
+        "id": "n6",
+        "name": "g",
+        "color": "#0074D9",
+        "mass": 0,
+        "cog": [
+          0,
+          0,
+          0
+        ],
+        "external_force": [
+          0,
+          0,
+          0
+        ],
+        "moment": [
+          0,
+          0,
+          0
+        ],
+        "euler_angles": [
+          0,
+          0,
+          0
+        ],
+        "rotation_order": "xyz",
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "position": {
+        "x": 153.35571308481002,
+        "y": 376.43404624182665
+      }
+    }
+  ],
+  "edges": [
+    {
+      "data": {
+        "id": "e0",
+        "source": "n1",
+        "target": "n0"
+      }
+    },
+    {
+      "data": {
+        "id": "e1",
+        "source": "n3",
+        "target": "n0"
+      }
+    },
+    {
+      "data": {
+        "id": "e2",
+        "source": "n2",
+        "target": "n0"
+      }
+    },
+    {
+      "data": {
+        "id": "e3",
+        "source": "n0",
+        "target": "n4"
+      }
+    },
+    {
+      "data": {
+        "id": "e4",
+        "source": "n4",
+        "target": "n6"
+      }
+    },
+    {
+      "data": {
+        "id": "e5",
+        "source": "n4",
+        "target": "n5"
+      }
+    }
+  ]
+}
