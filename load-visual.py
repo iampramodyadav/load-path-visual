@@ -25,36 +25,27 @@ node_properties = html.Div([
     dcc.Input(id='node-name-input', placeholder='Node Name'),
 
     html.Div([
-        html.Label("Mass in Kg:"),
+        html.Label("Mass (kg): "),
         dcc.Input(id='node-mass-input', type='number', placeholder='Mass (kg)', value=0, style={'width': '50px'}),
     ]),
 
     html.Div([
-        html.Label("Center of Gravity in Global Frame (x,y,z):"),
+        html.Label("CoG G(X,Y,Z): "),
         dcc.Input(id='node-cog-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
         dcc.Input(id='node-cog-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}), 
         dcc.Input(id='node-cog-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
-    ]),
+    ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
     html.Hr(),
+
     html.Div([
-        html.Label("External Force in Local Frame (x,y,z):"),
-        dcc.Input(id='node-force-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
-        dcc.Input(id='node-force-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
-        dcc.Input(id='node-force-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
-    ]),
-    
+        html.Label("Position(x,y,z): "),
+        dcc.Input(id='node-trans-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-trans-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-trans-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
+    ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
+
     html.Div([
-        html.Label("Moment in Local Frame (x,y,z):"),
-        dcc.Input(id='node-moment-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
-        dcc.Input(id='node-moment-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
-        dcc.Input(id='node-moment-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
-    ]),
-    
-    html.Div([
-        html.Label("Euler Angles (x,y,z) in degrees:"),
-        dcc.Input(id='node-euler-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
-        dcc.Input(id='node-euler-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
-        dcc.Input(id='node-euler-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'}),
+        html.Label("Rotation Order:", style={'minWidth': '100px'}),
         dcc.Dropdown(
             id='rotation-order',
             options=[
@@ -62,18 +53,34 @@ node_properties = html.Div([
                 for order in ['xyz', 'xzy', 'yxz', 'yzx', 'zxy', 'zyx']
             ],
             value='xyz',
+            style={'width': '120px'},
             placeholder='Rotation Order'
         )
-    ]),
+    ],style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
+
+    html.Div([
+        html.Label("Rotation (deg):", style={'minWidth': '100px'}),
+        dcc.Input(id='node-euler-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-euler-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-euler-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'}),
+    ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),    
+
+    html.Div([
+        html.Label("Force L(X,Y,Z):"),
+        dcc.Input(id='node-force-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-force-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-force-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
+    ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
     
     html.Div([
-        html.Label("Translation (x,y,z):"),
-        dcc.Input(id='node-trans-x-input', type='number', placeholder='X', value=0),
-        dcc.Input(id='node-trans-y-input', type='number', placeholder='Y', value=0),
-        dcc.Input(id='node-trans-z-input', type='number', placeholder='Z', value=0)
-    ]),
-    
+        html.Label("Moment L(X,Y,Z):"),
+        dcc.Input(id='node-moment-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-moment-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-moment-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
+    ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
+    html.Hr(),
     html.Button('Update Node', id='update-node-btn')
+
 ], style={'padding': '10px','borderRadius': '10px',  'border': '1px solid black'})
 
 # Interactive Graph Builder controls
@@ -236,7 +243,8 @@ app.layout = html.Div([
                 ]
             ),
             # Node properties table below the plot
-            node_properties_table
+            node_properties_table,
+            html.Footer('© 2025 Pramod Kumar Yadav (@iAmPramodYadav)'),
         ], style={
             'width': '75%', 'height': '80vh',
             #'gridArea': 'main',
