@@ -2,7 +2,7 @@
   "nodes": [
     {
       "data": {
-        "id": "rotor",
+        "id": "Rotor Blades",
         "name": "Rotor Blades",
         "color": "#2ECC40",
         "mass": 54000,
@@ -17,7 +17,7 @@
     },
     {
       "data": {
-        "id": "hub",
+        "id": "Hub Assembly",
         "name": "Hub Assembly",
         "color": "#0074D9",
         "mass": 42000,
@@ -32,7 +32,7 @@
     },
     {
       "data": {
-        "id": "nacelle",
+        "id": "Nacelle Assembly",
         "name": "Nacelle Assembly",
         "color": "#FF851B",
         "mass": 85000,
@@ -47,7 +47,7 @@
     },
     {
       "data": {
-        "id": "tower_top",
+        "id": "Tower Top Section",
         "name": "Tower Top Section",
         "color": "#B10DC9",
         "mass": 40000,
@@ -62,7 +62,7 @@
     },
     {
       "data": {
-        "id": "tower_mid",
+        "id": "Tower Middle Section",
         "name": "Tower Middle Section",
         "color": "#FF4136",
         "mass": 55000,
@@ -77,7 +77,7 @@
     },
     {
       "data": {
-        "id": "tower_base",
+        "id": "Tower Base Section",
         "name": "Tower Base Section",
         "color": "#2ECC40",
         "mass": 70000,
@@ -92,7 +92,7 @@
     },
     {
       "data": {
-        "id": "foundation",
+        "id": "Foundation",
         "name": "Foundation",
         "color": "#0074D9",
         "mass": 500000,
@@ -110,43 +110,43 @@
     {
       "data": {
         "id": "e0",
-        "source": "rotor",
-        "target": "hub"
+        "source": "Rotor Blades",
+        "target": "Hub Assembly"
       }
     },
     {
       "data": {
         "id": "e1",
-        "source": "hub",
-        "target": "nacelle"
+        "source": "Hub Assembly",
+        "target": "Nacelle Assembly"
       }
     },
     {
       "data": {
         "id": "e2",
-        "source": "nacelle",
-        "target": "tower_top"
+        "source": "Nacelle Assembly",
+        "target": "Tower Top Section"
       }
     },
     {
       "data": {
         "id": "e3",
-        "source": "tower_top",
-        "target": "tower_mid"
+        "source": "Tower Top Section",
+        "target": "Tower Middle Section"
       }
     },
     {
       "data": {
         "id": "e4",
-        "source": "tower_mid",
-        "target": "tower_base"
+        "source": "Tower Middle Section",
+        "target": "Tower Base Section"
       }
     },
     {
       "data": {
         "id": "e5",
-        "source": "tower_base",
-        "target": "foundation"
+        "source": "Tower Base Section",
+        "target": "Foundation"
       }
     }
   ]
