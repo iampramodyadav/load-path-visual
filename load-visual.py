@@ -1,7 +1,7 @@
 """
 @Author:    Pramod Kumar Yadav
 @email:     pkyadav01234@gmail.com
-@Date:      Feb, 2023
+@Date:      March, 2025
 @status:    development
 @PythonVersion: python3
 """
@@ -60,7 +60,7 @@ node_properties = html.Div([
     ]),
 
     html.Div([
-        html.Label("CoG G(X,Y,Z): "),
+        html.Label("CoG L(X,Y,Z): "),
         dcc.Input(id='node-cog-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
         dcc.Input(id='node-cog-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}), 
         dcc.Input(id='node-cog-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
