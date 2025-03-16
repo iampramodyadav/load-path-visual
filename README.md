@@ -1,6 +1,11 @@
 # Load Path Visual Tool
 
 An interactive web-based tool for creating and visualizing load path graphs with node properties and connections. Built with Dash and Cytoscape.js.
+## GUI Screenshot
+
+![Load Path Visual Tool Interface](./gui_screenshot.png)
+
+The interface provides an intuitive layout with a sidebar for node properties and graph building controls, and a main visualization area for the interactive graph.
 
 ## Overview
 
