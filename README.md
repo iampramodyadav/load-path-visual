@@ -10,9 +10,10 @@ Load Path Visual is a powerful tool designed for engineers and analysts to creat
 
 - **Interactive Graph Building**
   - Add and delete nodes with drag-and-drop functionality
-  - Create connections between nodes
+  - Create connections between nodes with unique IDs
   - Visual node selection and connection management
   - Real-time graph updates
+  - Automatic edge refreshing for improved visibility
 
 - **Node Properties Management**
   - Mass configuration
@@ -23,7 +24,8 @@ Load Path Visual is a powerful tool designed for engineers and analysts to creat
   - Moment vectors (X,Y,Z)
 
 - **Data Management**
-  - Export graph data to JSON
+  - Export graph data to JSON with timestamps for unique filenames
+  - Compact JSON formatting for improved readability
   - Import graph data from JSON files
   - Real-time property table view
   - Persistent node positioning
@@ -78,11 +80,14 @@ http://localhost:8051
 1. **Adding Nodes**
    - Click the "Add Node" button to create a new node
    - Nodes will appear with random colors and positions
+   - Each node has a unique ID that matches its name
 
 2. **Creating Connections**
    - Click on a source node
    - Click on a target node to create a connection
    - Connections are displayed with directional arrows
+   - Each connection has a unique ID for reliable tracking
+   - If a connection exists but isn't visible, clicking the same nodes will refresh it
 
 3. **Modifying Node Properties**
    - Select a node from the dropdown
@@ -96,9 +101,59 @@ http://localhost:8051
    - Click "Update Node" to save changes
 
 4. **Managing Data**
-   - Export: Click "Export to JSON" to save your graph
+   - Export: Click "Export to JSON" to save your graph with a timestamped filename
    - Import: Use "Import from JSON" to load a saved graph
    - View all node properties in the table below the graph
+
+### JSON File Format
+
+The application uses a specific JSON format for storing graph data:
+
+```json
+{
+  "nodes": [
+    {
+      "data": {
+        "id": "Node Name",
+        "name": "Node Name",
+        "color": "#2ECC40",
+        "mass": 54000,
+        "cog": [5, 0, 0],
+        "external_force": [50000, 0, -20000],
+        "moment": [100000, 0, 0],
+        "euler_angles": [0, 0, 30],
+        "rotation_order": "xyz",
+        "translation": [8, 0, 90]
+      },
+      "position": {"x": 600, "y": 100}
+    },
+    // Additional nodes...
+  ],
+  "edges": [
+    {
+      "data": {
+        "id": "e0",
+        "source": "Source Node Name",
+        "target": "Target Node Name"
+      }
+    },
+    // Additional edges...
+  ]
+}
+```
+
+**Important Notes:**
+- Node IDs must match their names for proper functioning
+- Edge IDs should be unique (automatically handled by the application)
+- Arrays are formatted on a single line for better readability
+- When importing, ensure your JSON follows this structure
+
+## Troubleshooting
+
+If connections are not visible after loading a JSON file:
+1. Try clicking on the same nodes again to refresh the connection
+2. Check that both nodes still exist in the graph
+3. Verify that your JSON file has the correct format with proper node IDs
 
 ## Contributing
 

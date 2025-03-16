@@ -171,7 +171,7 @@ app.layout = html.Div([
     # Store for selected node
     dcc.Store(id='selected-node', data=None),
     
-    html.H1("Interactive Graph Builder", style={'textAlign': 'center'}),
+    html.H1("Load Path Visual Tool", style={'textAlign': 'center'}),
     
     # Main layout with sidebar and plot area using CSS Grid
     html.Div([
