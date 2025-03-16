@@ -25,19 +25,6 @@ node_properties = html.Div([
     dcc.Input(id='node-name-input', placeholder='Node Name'),
 
     html.Div([
-        html.Label("Mass (kg): "),
-        dcc.Input(id='node-mass-input', type='number', placeholder='Mass (kg)', value=0, style={'width': '50px'}),
-    ]),
-
-    html.Div([
-        html.Label("CoG G(X,Y,Z): "),
-        dcc.Input(id='node-cog-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
-        dcc.Input(id='node-cog-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}), 
-        dcc.Input(id='node-cog-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
-    ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
-    html.Hr(),
-
-    html.Div([
         html.Label("Position(x,y,z): "),
         dcc.Input(id='node-trans-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
         dcc.Input(id='node-trans-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
@@ -64,6 +51,21 @@ node_properties = html.Div([
         dcc.Input(id='node-euler-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}),
         dcc.Input(id='node-euler-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'}),
     ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),    
+
+
+    html.Hr(),
+    html.Div([
+        html.Label("Mass (kg): "),
+        dcc.Input(id='node-mass-input', type='number', placeholder='Mass (kg)', value=0, style={'width': '50px'}),
+    ]),
+
+    html.Div([
+        html.Label("CoG G(X,Y,Z): "),
+        dcc.Input(id='node-cog-x-input', type='number', placeholder='X', value=0,style={'width': '50px'}),
+        dcc.Input(id='node-cog-y-input', type='number', placeholder='Y', value=0,style={'width': '50px'}), 
+        dcc.Input(id='node-cog-z-input', type='number', placeholder='Z', value=0,style={'width': '50px'})
+    ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
+    html.Hr(),
 
     html.Div([
         html.Label("Force L(X,Y,Z):"),
