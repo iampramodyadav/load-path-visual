@@ -113,10 +113,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Pramod Kumar Yadav  
 Email: pkyadav01234@gmail.com
 
-## Version History
-
-- February 2023: Initial development version
-
 ## Acknowledgments
 
 - Built with [Dash](https://dash.plotly.com/)
