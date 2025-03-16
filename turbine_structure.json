@@ -1,0 +1,153 @@
+{
+  "nodes": [
+    {
+      "data": {
+        "id": "rotor",
+        "name": "Rotor Blades",
+        "color": "#2ECC40",
+        "mass": 54000,
+        "cog": [5, 0, 0],
+        "external_force": [50000, 0, -20000],
+        "moment": [100000, 0, 0],
+        "euler_angles": [0, 0, 30],
+        "rotation_order": "xyz",
+        "translation": [8, 0, 90]
+      },
+      "position": {"x": 600, "y": 100}
+    },
+    {
+      "data": {
+        "id": "hub",
+        "name": "Hub Assembly",
+        "color": "#0074D9",
+        "mass": 42000,
+        "cog": [0, 0, 0],
+        "external_force": [30000, 0, -15000],
+        "moment": [50000, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [3, 0, 90]
+      },
+      "position": {"x": 500, "y": 100}
+    },
+    {
+      "data": {
+        "id": "nacelle",
+        "name": "Nacelle Assembly",
+        "color": "#FF851B",
+        "mass": 85000,
+        "cog": [0, 0, 0],
+        "external_force": [20000, 5000, -85000],
+        "moment": [30000, 10000, 5000],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 90]
+      },
+      "position": {"x": 400, "y": 100}
+    },
+    {
+      "data": {
+        "id": "tower_top",
+        "name": "Tower Top Section",
+        "color": "#B10DC9",
+        "mass": 40000,
+        "cog": [0, 0, -5],
+        "external_force": [15000, 3000, -40000],
+        "moment": [25000, 8000, 3000],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 70]
+      },
+      "position": {"x": 400, "y": 200}
+    },
+    {
+      "data": {
+        "id": "tower_mid",
+        "name": "Tower Middle Section",
+        "color": "#FF4136",
+        "mass": 55000,
+        "cog": [0, 0, -5],
+        "external_force": [10000, 2000, -55000],
+        "moment": [20000, 5000, 2000],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 40]
+      },
+      "position": {"x": 400, "y": 300}
+    },
+    {
+      "data": {
+        "id": "tower_base",
+        "name": "Tower Base Section",
+        "color": "#2ECC40",
+        "mass": 70000,
+        "cog": [0, 0, -5],
+        "external_force": [8000, 1500, -70000],
+        "moment": [15000, 3000, 1000],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 10]
+      },
+      "position": {"x": 400, "y": 400}
+    },
+    {
+      "data": {
+        "id": "foundation",
+        "name": "Foundation",
+        "color": "#0074D9",
+        "mass": 500000,
+        "cog": [0, 0, -2],
+        "external_force": [0, 0, -500000],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {"x": 400, "y": 500}
+    }
+  ],
+  "edges": [
+    {
+      "data": {
+        "id": "e0",
+        "source": "rotor",
+        "target": "hub"
+      }
+    },
+    {
+      "data": {
+        "id": "e1",
+        "source": "hub",
+        "target": "nacelle"
+      }
+    },
+    {
+      "data": {
+        "id": "e2",
+        "source": "nacelle",
+        "target": "tower_top"
+      }
+    },
+    {
+      "data": {
+        "id": "e3",
+        "source": "tower_top",
+        "target": "tower_mid"
+      }
+    },
+    {
+      "data": {
+        "id": "e4",
+        "source": "tower_mid",
+        "target": "tower_base"
+      }
+    },
+    {
+      "data": {
+        "id": "e5",
+        "source": "tower_base",
+        "target": "foundation"
+      }
+    }
+  ]
+} 
