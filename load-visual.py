@@ -1,9 +1,25 @@
 """
-@Author:    Pramod Kumar Yadav
-@email:     pkyadav01234@gmail.com
-@Date:      March, 2025
-@status:    development
-@PythonVersion: python3
+Load Path Visual Tool
+
+A web-based interactive tool for creating and visualizing load path graphs in mechanical systems.
+This tool allows users to create nodes representing mechanical components, establish connections
+between them, and specify various mechanical properties such as mass, forces, moments, and
+coordinate transformations.
+
+Features:
+- Interactive node creation and positioning
+- Dynamic edge/connection management
+- Property editing for nodes (mass, forces, moments, etc.)
+- JSON import/export with position preservation
+- Visual representation using Cytoscape
+- Tabular view of node properties
+
+Author: Pramod Kumar Yadav
+Email: pkyadav01234@gmail.com
+Date: March, 2025
+Status: Development
+Python Version: Python 3
+Dependencies: dash, dash-cytoscape, json, random, datetime, re
 """
 
 import dash
@@ -257,6 +273,22 @@ app.layout = html.Div([
     State('graph-data', 'data')
 )
 def add_node(n_clicks, data):
+    """
+    Creates a new node with default properties and a unique name.
+    
+    Args:
+        n_clicks (int): Number of times the add node button has been clicked
+        data (dict): Current graph data containing nodes and edges
+        
+    Returns:
+        dict: Updated graph data with the new node added
+        
+    The function:
+    1. Generates a unique node name (Node0, Node1, etc.)
+    2. Assigns random position and color
+    3. Initializes default mechanical properties (mass, forces, etc.)
+    4. Adds the node to the graph data
+    """
     if not n_clicks:
         return dash.no_update
     
@@ -297,6 +329,15 @@ def add_node(n_clicks, data):
     Input('cytoscape', 'tapNodeData')
 )
 def store_selected_node(node_data):
+    """
+    Stores the ID of the currently selected node.
+    
+    Args:
+        node_data (dict): Data of the node that was clicked/selected
+        
+    Returns:
+        str or None: ID of the selected node, or None if no node is selected
+    """
     if node_data and 'id' in node_data:
         return node_data['id']
     return None
@@ -311,6 +352,22 @@ def store_selected_node(node_data):
     prevent_initial_call=True
 )
 def delete_node(n_clicks, selected_node_id, graph_data):
+    """
+    Deletes a selected node and all its connected edges from the graph.
+    
+    Args:
+        n_clicks (int): Number of times the delete button has been clicked
+        selected_node_id (str): ID of the node to be deleted
+        graph_data (dict): Current graph data containing nodes and edges
+        
+    Returns:
+        tuple: (Updated graph data, Status message)
+        
+    The function:
+    1. Removes the specified node from the nodes list
+    2. Removes all edges connected to the deleted node
+    3. Resets the connection state
+    """
     if not n_clicks or not selected_node_id:
         return dash.no_update, dash.no_update
     
@@ -334,8 +391,20 @@ def delete_node(n_clicks, selected_node_id, graph_data):
 )
 def update_cytoscape(data, current_elements):
     """
-    This function converts graph_data into elements for Cytoscape.
-    It ensures all nodes and edges have consistent IDs and that positions are preserved.
+    Updates the Cytoscape visualization while preserving node positions.
+    
+    Args:
+        data (dict): Current graph data containing nodes and edges
+        current_elements (list): Current Cytoscape elements with positions
+        
+    Returns:
+        list: Updated elements for Cytoscape visualization
+        
+    The function:
+    1. Preserves node positions from current layout
+    2. Ensures node IDs match their names
+    3. Validates and includes only edges between existing nodes
+    4. Maintains consistent edge IDs
     """
     # Create a dictionary of current node positions
     current_positions = {}
@@ -387,6 +456,18 @@ def update_cytoscape(data, current_elements):
     State('node-positions', 'data')
 )
 def store_node_positions(tap_data, mouseover_data, elements, positions):
+    """
+    Stores the current positions of all nodes in the graph.
+    
+    Args:
+        tap_data (dict): Data from node tap event
+        mouseover_data (dict): Data from node mouseover event
+        elements (list): Current Cytoscape elements
+        positions (dict): Current stored positions
+        
+    Returns:
+        dict: Updated positions dictionary mapping node IDs to their positions
+    """
     # This callback captures positions from elements when interactions happen
     # or when elements are updated
     if elements:
@@ -407,6 +488,23 @@ def store_node_positions(tap_data, mouseover_data, elements, positions):
     prevent_initial_call=True
 )
 def handle_node_click(node_data, click_state, graph_data):
+    """
+    Handles node click events for creating connections between nodes.
+    
+    Args:
+        node_data (dict): Data of the clicked node
+        click_state (str): Current state of the connection process
+        graph_data (dict): Current graph data
+        
+    Returns:
+        tuple: (Updated graph data, Status message)
+        
+    The function:
+    1. Manages the two-click process for creating edges
+    2. Validates node existence and prevents self-loops
+    3. Handles edge recreation and updates
+    4. Maintains sequential edge IDs (e0, e1, etc.)
+    """
     if not node_data or 'id' not in node_data:
         return dash.no_update, dash.no_update
         
@@ -470,6 +568,17 @@ def handle_node_click(node_data, click_state, graph_data):
     Input('graph-data', 'data')
 )
 def update_connection_list(data):
+    """
+    Updates the displayed list of connections in the UI.
+    
+    Args:
+        data (dict): Current graph data
+        
+    Returns:
+        dash component: HTML component showing the list of connections
+        
+    Format: edge_id: source_node → target_node
+    """
     if not data['edges']:
         return "No connections yet"
         
@@ -491,6 +600,16 @@ def update_connection_list(data):
     prevent_initial_call=True
 )
 def delete_connection(edge_data, graph_data):
+    """
+    Deletes a selected edge from the graph.
+    
+    Args:
+        edge_data (dict): Data of the edge to be deleted
+        graph_data (dict): Current graph data
+        
+    Returns:
+        tuple: (Updated graph data, Status message)
+    """
     if not edge_data or 'id' not in edge_data:
         return dash.no_update, dash.no_update
         
@@ -527,6 +646,24 @@ def update_node_properties(n_clicks, selected_node_id, new_name,
                          euler_x, euler_y, euler_z,
                          trans_x, trans_y, trans_z,
                          rotation_order, graph_data, elements):
+    """
+    Updates the properties of a selected node.
+    
+    Args:
+        n_clicks (int): Number of times the update button has been clicked
+        selected_node_id (str): ID of the node to update
+        new_name (str): New name for the node
+        *args: Various node properties (mass, position, rotation, forces, etc.)
+        
+    Returns:
+        dict: Updated graph data
+        
+    The function:
+    1. Updates node name and ID
+    2. Updates mechanical properties
+    3. Preserves node position
+    4. Updates edge references if node name changes
+    """
     if not selected_node_id:
         return dash.no_update
     
@@ -603,6 +740,20 @@ def update_node_properties_table(data):
 
 # Function to format JSON with compact arrays
 def format_json_compact_arrays(json_str):
+    """
+    Formats JSON string to make arrays more compact and readable.
+    
+    Args:
+        json_str (str): JSON string to format
+        
+    Returns:
+        str: Formatted JSON string with compact arrays
+        
+    The function:
+    1. Identifies array patterns in the JSON
+    2. Compacts multi-line arrays into single lines
+    3. Preserves proper indentation for objects
+    """
     # Use regex to find arrays and compact them
     # This pattern looks for array patterns with newlines and extra spaces
     pattern = r'\[\s*\n\s*([^][]*?)\s*\n\s*\]'
@@ -634,6 +785,23 @@ def format_json_compact_arrays(json_str):
     prevent_initial_call=True
 )
 def export_json(n_clicks, data, elements):
+    """
+    Exports the current graph to a JSON file.
+    
+    Args:
+        n_clicks (int): Number of times the export button has been clicked
+        data (dict): Current graph data
+        elements (list): Current Cytoscape elements
+        
+    Returns:
+        dict: Dictionary containing the formatted JSON content and filename
+        
+    The function:
+    1. Preserves current node positions
+    2. Maintains node and edge IDs
+    3. Creates a timestamped filename
+    4. Formats arrays for readability
+    """
     if not n_clicks:
         return dash.no_update
     
@@ -695,6 +863,23 @@ def export_json(n_clicks, data, elements):
     prevent_initial_call=True
 )
 def import_json(contents, filename):
+    """
+    Imports graph data from a JSON file.
+    
+    Args:
+        contents (str): Base64 encoded file contents
+        filename (str): Name of the uploaded file
+        
+    Returns:
+        tuple: (Processed graph data, Status message)
+        
+    The function:
+    1. Decodes and validates JSON data
+    2. Processes nodes with all required properties
+    3. Preserves node positions from the file
+    4. Validates and processes edges
+    5. Ensures ID consistency
+    """
     if contents is None:
         return dash.no_update, dash.no_update
     
