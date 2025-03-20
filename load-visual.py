@@ -495,7 +495,7 @@ def update_connection_list(data):
         return "No connections yet"
         
     connections = [
-        html.Li(f"{edge['data']['source']} → {edge['data']['target']}")
+        html.Li(f"{edge['data']['id']}: {edge['data']['source']} → {edge['data']['target']}")
         for edge in data['edges']
     ]
     return html.Div([
