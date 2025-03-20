@@ -42,7 +42,7 @@ def find_load_contributors(json_data, selected_edge_id):
 # Example usage
 if __name__ == "__main__":
     import json
-    with open("load_path_data_20250320_232805.json") as f:
+    with open("load_path_data_20250321_000033.json") as f:
         json_data = json.load(f)
-    result = find_load_contributors(json_data, "e1742507751")
+    result = find_load_contributors(json_data, "e20")
     print(result)

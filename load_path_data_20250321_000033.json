@@ -4,7 +4,7 @@
       "data": {
         "id": "Node0",
         "name": "Node0",
-        "color": "#FF4136",
+        "color": "#B10DC9",
         "mass": 0,
         "cog": [0, 0, 0],
         "external_force": [0, 0, 0],
@@ -14,32 +14,14 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 466.08569980060355,
-        "y": 200.1085767196059
+        "x": 264.1838382969312,
+        "y": 510.3127521938834
       }
     },
     {
       "data": {
         "id": "Node1",
         "name": "Node1",
-        "color": "#2ECC40",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 372.7243845641023,
-        "y": 367.03661392381747
-      }
-    },
-    {
-      "data": {
-        "id": "Node2",
-        "name": "Node2",
         "color": "#0074D9",
         "mass": 0,
         "cog": [0, 0, 0],
@@ -50,15 +32,15 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 517.7817949191125,
-        "y": 309.9941408777962
+        "x": 17.9801880349809,
+        "y": 290.9307387368885
       }
     },
     {
       "data": {
-        "id": "Node3",
-        "name": "Node3",
-        "color": "#FF851B",
+        "id": "Node2",
+        "name": "Node2",
+        "color": "#2ECC40",
         "mass": 0,
         "cog": [0, 0, 0],
         "external_force": [0, 0, 0],
@@ -68,8 +50,26 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 358.6155340923798,
-        "y": 516.1170701987071
+        "x": 338.37289848896415,
+        "y": 373.4941856912386
+      }
+    },
+    {
+      "data": {
+        "id": "Node3",
+        "name": "Node3",
+        "color": "#B10DC9",
+        "mass": 0,
+        "cog": [0, 0, 0],
+        "external_force": [0, 0, 0],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {
+        "x": 453.88848053610417,
+        "y": 248.953823291746
       }
     },
     {
@@ -86,32 +86,14 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 302.67222529477283,
-        "y": 293.68786901986215
+        "x": 603.2943023583681,
+        "y": 157.03448529265754
       }
     },
     {
       "data": {
         "id": "Node5",
         "name": "Node5",
-        "color": "#FF851B",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 612.2803721656003,
-        "y": 312.04941174718397
-      }
-    },
-    {
-      "data": {
-        "id": "Node6",
-        "name": "Node6",
         "color": "#0074D9",
         "mass": 0,
         "cog": [0, 0, 0],
@@ -122,15 +104,33 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 170.41632128851273,
-        "y": 303.56999995689256
+        "x": 696.1990301855736,
+        "y": 234.6592635173644
+      }
+    },
+    {
+      "data": {
+        "id": "Node6",
+        "name": "Node6",
+        "color": "#B10DC9",
+        "mass": 0,
+        "cog": [0, 0, 0],
+        "external_force": [0, 0, 0],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {
+        "x": 265.2643632641961,
+        "y": 210.18104664953165
       }
     },
     {
       "data": {
         "id": "Node7",
         "name": "Node7",
-        "color": "#2ECC40",
+        "color": "#B10DC9",
         "mass": 0,
         "cog": [0, 0, 0],
         "external_force": [0, 0, 0],
@@ -140,15 +140,15 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 417.25651101895454,
-        "y": 310.91438385596683
+        "x": 567.0753626493429,
+        "y": 252.5498903326338
       }
     },
     {
       "data": {
         "id": "Node8",
         "name": "Node8",
-        "color": "#2ECC40",
+        "color": "#B10DC9",
         "mass": 0,
         "cog": [0, 0, 0],
         "external_force": [0, 0, 0],
@@ -158,8 +158,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 227.09939227979106,
-        "y": 217.18753713142107
+        "x": 59.78732359194802,
+        "y": 209.86198860821466
       }
     },
     {
@@ -176,8 +176,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 142.04393274821155,
-        "y": 225.25795821833333
+        "x": 145.79557422991638,
+        "y": 329.328742802817
       }
     },
     {
@@ -194,8 +194,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 692.0039092139673,
-        "y": 225.45815806576132
+        "x": 237.25619536304512,
+        "y": 356.70393579908045
       }
     },
     {
@@ -212,32 +212,14 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 721.1736375952295,
-        "y": 292.4936153985846
+        "x": 481.90329096497453,
+        "y": 363.5003032685718
       }
     },
     {
       "data": {
         "id": "Node12",
         "name": "Node12",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 804.1611453241463,
-        "y": 301.5827917431796
-      }
-    },
-    {
-      "data": {
-        "id": "Node13",
-        "name": "Node13",
         "color": "#0074D9",
         "mass": 0,
         "cog": [0, 0, 0],
@@ -248,50 +230,14 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 620.524269448414,
-        "y": 124.94005208313892
+        "x": -52.98914595965968,
+        "y": 235.32503904163354
       }
     },
     {
       "data": {
-        "id": "Node14",
-        "name": "Node14",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 66.18144559318975,
-        "y": 328.1439122443086
-      }
-    },
-    {
-      "data": {
-        "id": "Node15",
-        "name": "Node15",
-        "color": "#2ECC40",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 841.0100778677961,
-        "y": 185.73774878903183
-      }
-    },
-    {
-      "data": {
-        "id": "Node16",
-        "name": "Node16",
+        "id": "Node13",
+        "name": "Node13",
         "color": "#FF851B",
         "mass": 0,
         "cog": [0, 0, 0],
@@ -302,86 +248,206 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 53.360470520539174,
-        "y": 250.73800426509604
+        "x": 785.7561803453746,
+        "y": 144.85952069564718
+      }
+    },
+    {
+      "data": {
+        "id": "Node14",
+        "name": "Node14",
+        "color": "#2ECC40",
+        "mass": 0,
+        "cog": [0, 0, 0],
+        "external_force": [0, 0, 0],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {
+        "x": 171.0217490912002,
+        "y": 222.75429750040695
+      }
+    },
+    {
+      "data": {
+        "id": "Node15",
+        "name": "Node15",
+        "color": "#FF851B",
+        "mass": 0,
+        "cog": [0, 0, 0],
+        "external_force": [0, 0, 0],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {
+        "x": 710.5291627733785,
+        "y": 333.29417376252735
+      }
+    },
+    {
+      "data": {
+        "id": "Node16",
+        "name": "Node16",
+        "color": "#2ECC40",
+        "mass": 0,
+        "cog": [0, 0, 0],
+        "external_force": [0, 0, 0],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {
+        "x": 280.1263169835731,
+        "y": 433.7084062930015
+      }
+    },
+    {
+      "data": {
+        "id": "Node17",
+        "name": "Node17",
+        "color": "#B10DC9",
+        "mass": 0,
+        "cog": [0, 0, 0],
+        "external_force": [0, 0, 0],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {
+        "x": 464.1078562046303,
+        "y": 453.0971834199827
+      }
+    },
+    {
+      "data": {
+        "id": "Node18",
+        "name": "Node18",
+        "color": "#0074D9",
+        "mass": 0,
+        "cog": [0, 0, 0],
+        "external_force": [0, 0, 0],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {
+        "x": 734.9159735225261,
+        "y": 443.6872267172082
+      }
+    },
+    {
+      "data": {
+        "id": "Node19",
+        "name": "Node19",
+        "color": "#2ECC40",
+        "mass": 0,
+        "cog": [0, 0, 0],
+        "external_force": [0, 0, 0],
+        "moment": [0, 0, 0],
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "translation": [0, 0, 0]
+      },
+      "position": {
+        "x": 404.38080003919674,
+        "y": 146.42108019280946
       }
     }
   ],
   "edges": [{
       "data": {
-        "id": "e1742507720", "source": "Node5", "target": "Node0"
+        "id": "e0", "source": "Node13", "target": "Node4"
       }
     }, {
       "data": {
-        "id": "e1742507724", "source": "Node0", "target": "Node2"
+        "id": "e1", "source": "Node13", "target": "Node5"
       }
     }, {
       "data": {
-        "id": "e1742507727", "source": "Node0", "target": "Node7"
+        "id": "e2", "source": "Node5", "target": "Node7"
       }
     }, {
       "data": {
-        "id": "e1742507729", "source": "Node2", "target": "Node7"
+        "id": "e3", "source": "Node4", "target": "Node7"
       }
     }, {
       "data": {
-        "id": "e1742507731", "source": "Node7", "target": "Node1"
+        "id": "e4", "source": "Node7", "target": "Node11"
       }
     }, {
       "data": {
-        "id": "e1742507736", "source": "Node6", "target": "Node4"
+        "id": "e5", "source": "Node11", "target": "Node3"
       }
     }, {
       "data": {
-        "id": "e1742507738", "source": "Node4", "target": "Node1"
+        "id": "e6", "source": "Node3", "target": "Node2"
       }
     }, {
       "data": {
-        "id": "e1742507747", "source": "Node1", "target": "Node3"
+        "id": "e7", "source": "Node11", "target": "Node2"
       }
     }, {
       "data": {
-        "id": "e1742507751", "source": "Node8", "target": "Node4"
+        "id": "e9", "source": "Node9", "target": "Node10"
       }
     }, {
       "data": {
-        "id": "e1742507757", "source": "Node9", "target": "Node8"
+        "id": "e11", "source": "Node6", "target": "Node10"
       }
     }, {
       "data": {
-        "id": "e1742507770", "source": "Node10", "target": "Node0"
+        "id": "e12", "source": "Node14", "target": "Node10"
       }
     }, {
       "data": {
-        "id": "e1742507778", "source": "Node11", "target": "Node5"
+        "id": "e13", "source": "Node1", "target": "Node14"
       }
     }, {
       "data": {
-        "id": "e1742507784", "source": "Node11", "target": "Node10"
+        "id": "e14", "source": "Node8", "target": "Node14"
       }
     }, {
       "data": {
-        "id": "e1742507790", "source": "Node12", "target": "Node11"
+        "id": "e15", "source": "Node12", "target": "Node8"
       }
     }, {
       "data": {
-        "id": "e1742507803", "source": "Node6", "target": "Node9"
+        "id": "e16", "source": "Node12", "target": "Node1"
       }
     }, {
       "data": {
-        "id": "e1742507829", "source": "Node13", "target": "Node0"
+        "id": "e17", "source": "Node15", "target": "Node11"
       }
     }, {
       "data": {
-        "id": "e1742507855", "source": "Node14", "target": "Node6"
+        "id": "e18", "source": "Node10", "target": "Node16"
       }
     }, {
       "data": {
-        "id": "e1742509170", "source": "Node15", "target": "Node12"
+        "id": "e19", "source": "Node2", "target": "Node16"
       }
     }, {
       "data": {
-        "id": "e1742509600", "source": "Node16", "target": "Node6"
+        "id": "e20", "source": "Node16", "target": "Node0"
+      }
+    }, {
+      "data": {
+        "id": "e21", "source": "Node17", "target": "Node16"
+      }
+    }, {
+      "data": {
+        "id": "e22", "source": "Node18", "target": "Node15"
+      }
+    }, {
+      "data": {
+        "id": "e23", "source": "Node19", "target": "Node3"
       }
     }]
 }
