@@ -630,9 +630,10 @@ def format_json_compact_arrays(json_str):
     Output('download-json', 'data'),
     Input('export-json-btn', 'n_clicks'),
     State('graph-data', 'data'),
+    State('cytoscape', 'elements'),  # Add elements state to get current positions
     prevent_initial_call=True
 )
-def export_json(n_clicks, data):
+def export_json(n_clicks, data, elements):
     if not n_clicks:
         return dash.no_update
     
@@ -640,18 +641,28 @@ def export_json(n_clicks, data):
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"load_path_data_{timestamp}.json"
     
+    # Get current positions from cytoscape elements
+    current_positions = {}
+    if elements:
+        for element in elements:
+            if 'position' in element and 'data' in element and 'id' in element['data']:
+                current_positions[element['data']['id']] = element['position']
+    
     # Clean up the data structure before export
     export_data = {'nodes': [], 'edges': []}
     
-    # Process nodes
+    # Process nodes with current positions
     for node in data['nodes']:
         node_data = node['data'].copy()
         # Make sure node ID is the same as name to keep things consistent
         node_data['id'] = node_data['name']
         
+        # Get current position from cytoscape if available
+        position = current_positions.get(node_data['id'], {'x': 0, 'y': 0})
+        
         export_data['nodes'].append({
             'data': node_data,
-            'position': node['position'] if 'position' in node else {'x': 0, 'y': 0}
+            'position': position
         })
     
     # Process edges with IDs
@@ -725,9 +736,11 @@ def import_json(contents, filename):
                 if 'translation' not in node_data:
                     node_data['translation'] = [0, 0, 0]
                 
+                # Preserve the exact position from the imported data
+                position = node.get('position', {'x': random.uniform(100, 800), 'y': random.uniform(100, 500)})
                 processed_data['nodes'].append({
                     'data': node_data,
-                    'position': node.get('position', {'x': random.uniform(100, 800), 'y': random.uniform(100, 500)})
+                    'position': position
                 })
             
             # Create a set of valid node IDs
