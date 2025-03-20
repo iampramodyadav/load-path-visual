@@ -431,44 +431,27 @@ def handle_node_click(node_data, click_state, graph_data):
         if first_id == clicked_id:
             return graph_data, f"Cannot connect a node to itself. First node: {clicked_id}. Click another node to create connection."
         
-        # Get existing source-target pairs to check for duplicates
-        existing_connections = {
-            (edge['data']['source'], edge['data']['target']) 
-            for edge in graph_data['edges']
-        }
-        existing_connections.update({
-            (edge['data']['target'], edge['data']['source']) 
-            for edge in graph_data['edges']
-        })
+        # Get existing edges between these nodes
+        existing_edges = [edge for edge in graph_data['edges'] 
+                         if (edge['data']['source'] == first_id and edge['data']['target'] == clicked_id) or
+                            (edge['data']['source'] == clicked_id and edge['data']['target'] == first_id)]
         
-        # Check if connection already exists
-        if (first_id, clicked_id) in existing_connections or (clicked_id, first_id) in existing_connections:
-            # If connection exists in data but might not be visible, let's recreate it
-            old_edges = [e for e in graph_data['edges'] 
-                         if (e['data']['source'] == first_id and e['data']['target'] == clicked_id) or
-                            (e['data']['source'] == clicked_id and e['data']['target'] == first_id)]
-            
-            if old_edges:
-                # Remove the existing edge
-                graph_data['edges'] = [e for e in graph_data['edges'] if e not in old_edges]
-                
-                # Create a fresh edge with same source/target but new ID
-                new_edge_id = f'e{int(datetime.datetime.now().timestamp())}'
-                graph_data['edges'].append({
-                    'data': {
-                        'id': new_edge_id,
-                        'source': first_id,
-                        'target': clicked_id
-                    }
-                })
-                return graph_data, f"Refreshed existing connection. Click a node to start new connection."
-            
-            return graph_data, f"Connection already exists. First node: {clicked_id}. Click another node to create connection."
+        # Remove any existing edges between these nodes
+        if existing_edges:
+            graph_data['edges'] = [edge for edge in graph_data['edges'] if edge not in existing_edges]
         
-        # Create a unique edge ID using timestamp to ensure uniqueness
-        edge_id = f'e{int(datetime.datetime.now().timestamp())}'
+        # Find the highest existing edge number
+        max_edge_num = -1
+        for edge in graph_data['edges']:
+            if 'id' in edge['data'] and edge['data']['id'].startswith('e'):
+                try:
+                    edge_num = int(edge['data']['id'][1:])
+                    max_edge_num = max(max_edge_num, edge_num)
+                except ValueError:
+                    continue
         
-        # Create new edge with explicit ID
+        # Create new edge with next sequential ID
+        edge_id = f'e{max_edge_num + 1}'
         new_edge = {
             'data': {
                 'id': edge_id,
@@ -477,13 +460,9 @@ def handle_node_click(node_data, click_state, graph_data):
             }
         }
         
-        # Verify both nodes exist before adding the edge
-        if (any(node['data']['id'] == first_id for node in graph_data['nodes']) and
-            any(node['data']['id'] == clicked_id for node in graph_data['nodes'])):
-            graph_data['edges'].append(new_edge)
-            return graph_data, "Connection created. Click a node to start new connection."
-        else:
-            return graph_data, "Cannot create edge - one or both nodes no longer exist."
+        # Add the new edge
+        graph_data['edges'].append(new_edge)
+        return graph_data, "Connection created. Click a node to start new connection."
 
 # Callback to display connection list
 @app.callback(
