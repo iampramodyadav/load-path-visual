@@ -60,17 +60,20 @@ DEFAULT_NODE_TEMPLATE = {
 
 # Define the base edge structure with RLT results field
 DEFAULT_EDGE_TEMPLATE = {
-    "data": {
-        "id": "e0",
-        "source": "",
-        "target": "",
-        # New RLT results field
+    "id": "e0",
+    "source": "",
+    "target": "",
+    "interface_properties": {
+        # RLT results field
         "rlt_results": {
             "force": [0.0, 0.0, 0.0],    # Transferred force [Fx, Fy, Fz]
             "moment": [0.0, 0.0, 0.0],   # Transferred moment [Mx, My, Mz]
             "is_valid": False,           # Calculation status flag
             "timestamp": None            # Last calculation time
-        }
+        },
+        "euler_angles": [0.0, 0.0, 0.0], # Rotation angles in degrees
+        "rotation_order": "xyz",         # Rotation convention
+        "position": [0.0, 0.0, 0.0]      # 3D position [X, Y, Z]
     }
 }
 
@@ -83,8 +86,14 @@ def validate_node(node):
 
 def validate_edge(edge):
     """Validates that an edge has all required RLT properties"""
-    required = ["source", "target", "rlt_results"]
-    return all(key in edge["data"] for key in required)
+    required = ["source", "target", "interface_properties"]
+    if not all(key in edge for key in required):
+        return False
+    
+    # Check interface_properties structure
+    interface_props = edge.get("interface_properties", {})
+    interface_required = ["rlt_results", "euler_angles", "rotation_order", "position"]
+    return all(key in interface_props for key in interface_required)
 
 # Add node property input fields
 node_properties = html.Div([
@@ -606,7 +615,7 @@ def handle_node_click(node_data, click_state, graph_data):
         # Find the highest existing edge number
         max_edge_num = -1
         for edge in graph_data['edges']:
-            if 'id' in edge['data'] and edge['data']['id'].startswith('e'):
+            if 'data' in edge and 'id' in edge['data'] and edge['data']['id'].startswith('e'):
                 try:
                     edge_num = int(edge['data']['id'][1:])
                     max_edge_num = max(max_edge_num, edge_num)
@@ -896,40 +905,67 @@ def export_json(n_clicks, data, elements):
                 "mass": "kg",
                 "distance": "mm"
             }
-        })
+        }),
+        'gravity': {
+            "value": 9.81,
+            "direction": [0, 0, -1]
+        }
     }
     
-    # Process nodes with current positions
+    # Process nodes with current positions, removing 'data' nesting
     for node in data['nodes']:
         node_data = node['data'].copy()
         
         # Make sure node ID is the same as name to keep things consistent
-        node_data['id'] = node_data['name']
+        node_data['id'] = node_data.get('name', node_data['id'])
         
         # Get current position from cytoscape if available
         position = current_positions.get(node_data['id'], {'x': 0, 'y': 0})
         
-        export_data['nodes'].append({
-            'data': node_data,
+        # Create node in the new format without 'data' nesting
+        export_node = {
+            'id': node_data['id'],
+            'name': node_data.get('name', node_data['id']),
+            'color': node_data.get('color', '#FF4136'),
+            'mass': node_data.get('mass', 0),
+            'cog': node_data.get('cog', [0, 0, 0]),
+            'external_force': node_data.get('external_force', [0, 0, 0]),
+            'moment': node_data.get('moment', [0, 0, 0]),
+            'euler_angles': node_data.get('euler_angles', [0, 0, 0]),
+            'rotation_order': node_data.get('rotation_order', 'xyz'),
+            'translation': node_data.get('translation', [0, 0, 0]),
             'position': position
-        })
+        }
+        
+        export_data['nodes'].append(export_node)
     
-    # Process edges with IDs and RLT results
+    # Process edges with interface_properties
     for edge in data['edges']:
         edge_data = edge['data'].copy()
         
-        # Make sure rlt_results is present
-        if 'rlt_results' not in edge_data:
-            edge_data['rlt_results'] = {
-                'force': [0.0, 0.0, 0.0],
-                'moment': [0.0, 0.0, 0.0],
-                'is_valid': False,
-                'timestamp': datetime.datetime.now().isoformat()
-            }
+        # Make sure all required fields exist
+        if 'id' not in edge_data:
+            edge_data['id'] = f"e{len(export_data['edges'])}"
         
-        export_data['edges'].append({
-            'data': edge_data
-        })
+        # Create edge in the new format with interface_properties
+        export_edge = {
+            'id': edge_data['id'],
+            'source': edge_data['source'],
+            'target': edge_data['target'],
+            'interface_properties': {
+                'rlt_results': edge_data.get('rlt_results', {
+                    'force': [0, 0, 0],
+                    'moment': [0, 0, 0],
+                    'is_valid': False,
+                    'timestamp': datetime.datetime.now().isoformat()
+                }),
+                'euler_angles': [0, 0, 0],  # Default values for new format
+                'rotation_order': 'xyz',    # Default values for new format
+                'position': [0, 0, 0]       # Default values for new format
+            }
+        }
+        
+        export_data['edges'].append(export_edge)
     
     # First generate the JSON with standard formatting
     json_str = json.dumps(export_data, indent=2)
@@ -991,11 +1027,26 @@ def import_json(contents, filename):
             
             # Process nodes
             for node in imported_data.get('nodes', []):
-                node_data = node.get('data', {}).copy()
-                
-                # Make sure ID exists and is the same as name for consistency
-                if 'name' in node_data:
-                    node_data['id'] = node_data['name']
+                # Check if the node follows the new format (direct properties) or old format (nested under 'data')
+                if 'data' in node:
+                    # Old format - properties nested under 'data'
+                    node_data = node['data'].copy()
+                    position = node.get('position', {'x': random.uniform(100, 800), 'y': random.uniform(100, 500)})
+                else:
+                    # New format - properties directly in node
+                    node_data = {
+                        'id': node.get('id', f'Node{len(processed_data["nodes"])}'),
+                        'name': node.get('name', f'Node{len(processed_data["nodes"])}'),
+                        'color': node.get('color', random.choice(['#FF4136', '#2ECC40', '#0074D9', '#FF851B', '#B10DC9'])),
+                        'mass': node.get('mass', 0.0),
+                        'cog': node.get('cog', [0.0, 0.0, 0.0]),
+                        'external_force': node.get('external_force', [0.0, 0.0, 0.0]),
+                        'moment': node.get('moment', [0.0, 0.0, 0.0]),
+                        'euler_angles': node.get('euler_angles', [0.0, 0.0, 0.0]),
+                        'rotation_order': node.get('rotation_order', 'xyz'),
+                        'translation': node.get('translation', [0.0, 0.0, 0.0])
+                    }
+                    position = node.get('position', {'x': random.uniform(100, 800), 'y': random.uniform(100, 500)})
                 
                 # Ensure all required fields exist with default values
                 if 'color' not in node_data:
@@ -1015,8 +1066,6 @@ def import_json(contents, filename):
                 if 'translation' not in node_data:
                     node_data['translation'] = [0.0, 0.0, 0.0]
                 
-                # Preserve the exact position from the imported data
-                position = node.get('position', {'x': random.uniform(100, 800), 'y': random.uniform(100, 500)})
                 processed_data['nodes'].append({
                     'data': node_data,
                     'position': position
@@ -1027,7 +1076,26 @@ def import_json(contents, filename):
             
             # Process edges
             for i, edge in enumerate(imported_data.get('edges', [])):
-                edge_data = edge.get('data', {}).copy()
+                # Check if the edge follows the new format (interface_properties) or old format (nested under 'data')
+                if 'data' in edge:
+                    # Old format
+                    edge_data = edge['data'].copy()
+                else:
+                    # New format
+                    interface_props = edge.get('interface_properties', {})
+                    rlt_results = interface_props.get('rlt_results', {
+                        'force': [0.0, 0.0, 0.0],
+                        'moment': [0.0, 0.0, 0.0],
+                        'is_valid': False,
+                        'timestamp': datetime.datetime.now().isoformat()
+                    })
+                    
+                    edge_data = {
+                        'id': edge.get('id', f'e{i}'),
+                        'source': edge.get('source', ''),
+                        'target': edge.get('target', ''),
+                        'rlt_results': rlt_results
+                    }
                 
                 # Make sure edge has an ID
                 if 'id' not in edge_data:

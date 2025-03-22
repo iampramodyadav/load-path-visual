@@ -1,654 +1,4 @@
 {
-  "nodes": [
-    {
-      "data": {
-        "id": "Node0",
-        "name": "Node0",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 291.7683852727316,
-        "y": 484.6305877681383
-      }
-    },
-    {
-      "data": {
-        "id": "Node1",
-        "name": "Node1",
-        "color": "#0074D9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": -72.07031376415044,
-        "y": 251.58613685227706
-      }
-    },
-    {
-      "data": {
-        "id": "Node2",
-        "name": "Node2",
-        "color": "#2ECC40",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 327.90979446366055,
-        "y": 318.32509173963797
-      }
-    },
-    {
-      "data": {
-        "id": "Node3",
-        "name": "Node3",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 500.0646975460025,
-        "y": 369.7082725381795
-      }
-    },
-    {
-      "data": {
-        "id": "Node4",
-        "name": "Node4",
-        "color": "#FF851B",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 602.0899417039864,
-        "y": 128.1899067328202
-      }
-    },
-    {
-      "data": {
-        "id": "Node5",
-        "name": "Node5",
-        "color": "#0074D9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 395.6398904695257,
-        "y": 118.31280860526185
-      }
-    },
-    {
-      "data": {
-        "id": "Node6",
-        "name": "Node6",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 297.60486661513454,
-        "y": 179.74292584864855
-      }
-    },
-    {
-      "data": {
-        "id": "Node7",
-        "name": "Node7",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 462.44432239630714,
-        "y": 196.42960510600554
-      }
-    },
-    {
-      "data": {
-        "id": "Node8",
-        "name": "Node8",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 144.4433470694042,
-        "y": 109.98690473031692
-      }
-    },
-    {
-      "data": {
-        "id": "Node9",
-        "name": "Node9",
-        "color": "#2ECC40",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 95.3824366534537,
-        "y": 360.71805487872774
-      }
-    },
-    {
-      "data": {
-        "id": "Node10",
-        "name": "Node10",
-        "color": "#FF851B",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 237.25619536304512,
-        "y": 356.70393579908045
-      }
-    },
-    {
-      "data": {
-        "id": "Node11",
-        "name": "Node11",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 448.928171897416,
-        "y": 256.51462966775586
-      }
-    },
-    {
-      "data": {
-        "id": "Node12",
-        "name": "Node12",
-        "color": "#0074D9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": -19.697451333693763,
-        "y": 144.01067663898417
-      }
-    },
-    {
-      "data": {
-        "id": "Node13",
-        "name": "Node13",
-        "color": "#FF851B",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 527.9833448128959,
-        "y": 103.95829586946046
-      }
-    },
-    {
-      "data": {
-        "id": "Node14",
-        "name": "Node14",
-        "color": "#2ECC40",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 171.0217490912002,
-        "y": 222.75429750040695
-      }
-    },
-    {
-      "data": {
-        "id": "Node15",
-        "name": "Node15",
-        "color": "#FF851B",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 574.6670982236354,
-        "y": 211.508504049068
-      }
-    },
-    {
-      "data": {
-        "id": "Node16",
-        "name": "Node16",
-        "color": "#2ECC40",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 300.1013337591526,
-        "y": 392.80718146681477
-      }
-    },
-    {
-      "data": {
-        "id": "Node17",
-        "name": "Node17",
-        "color": "#B10DC9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 531.6424367315897,
-        "y": 422.6590626190996
-      }
-    },
-    {
-      "data": {
-        "id": "Node18",
-        "name": "Node18",
-        "color": "#0074D9",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 731.1112084224158,
-        "y": 199.23106903511558
-      }
-    },
-    {
-      "data": {
-        "id": "Node19",
-        "name": "Node19",
-        "color": "#2ECC40",
-        "mass": 0,
-        "cog": [0, 0, 0],
-        "external_force": [0, 0, 0],
-        "moment": [0, 0, 0],
-        "euler_angles": [0, 0, 0],
-        "rotation_order": "xyz",
-        "translation": [0, 0, 0]
-      },
-      "position": {
-        "x": 643.1298100711232,
-        "y": 369.95102982429466
-      }
-    }
-  ],
-  "edges": [
-    {
-      "data": {
-        "id": "e0",
-        "source": "Node13",
-        "target": "Node4",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e1",
-        "source": "Node13",
-        "target": "Node5",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e2",
-        "source": "Node5",
-        "target": "Node7",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e3",
-        "source": "Node4",
-        "target": "Node7",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e4",
-        "source": "Node7",
-        "target": "Node11",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e5",
-        "source": "Node11",
-        "target": "Node3",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e6",
-        "source": "Node3",
-        "target": "Node2",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e7",
-        "source": "Node11",
-        "target": "Node2",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e9",
-        "source": "Node9",
-        "target": "Node10",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e11",
-        "source": "Node6",
-        "target": "Node10",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e12",
-        "source": "Node14",
-        "target": "Node10",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e13",
-        "source": "Node1",
-        "target": "Node14",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e14",
-        "source": "Node8",
-        "target": "Node14",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e15",
-        "source": "Node12",
-        "target": "Node8",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e16",
-        "source": "Node12",
-        "target": "Node1",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e17",
-        "source": "Node15",
-        "target": "Node11",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e18",
-        "source": "Node10",
-        "target": "Node16",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e19",
-        "source": "Node2",
-        "target": "Node16",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e20",
-        "source": "Node16",
-        "target": "Node0",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e21",
-        "source": "Node17",
-        "target": "Node16",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e22",
-        "source": "Node18",
-        "target": "Node15",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    },
-    {
-      "data": {
-        "id": "e23",
-        "source": "Node19",
-        "target": "Node3",
-        "rlt_results": {
-          "force": [0, 0, 0],
-          "moment": [0, 0, 0],
-          "is_valid": false,
-          "timestamp": "2025-03-22T22:10:53.824991"
-        }
-      }
-    }
-  ],
   "metadata": {
     "version": "1.0",
     "coordinate_system": "right-handed",
@@ -658,5 +8,685 @@
       "mass": "kg",
       "distance": "mm"
     }
+  },
+  "nodes": [
+    {
+      "id": "Node0",
+      "name": "Node0",
+      "color": "#B10DC9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 291.768,
+        "y": 484.631
+      }
+    },
+    {
+      "id": "Node1",
+      "name": "Node1",
+      "color": "#0074D9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": -72.07031376415044,
+        "y": 251.58613685227706
+      }
+    },
+    {
+      "id": "Node2",
+      "name": "Node2",
+      "color": "#2ECC40",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 327.90979446366055,
+        "y": 318.32509173963797
+      }
+    },
+    {
+      "id": "Node3",
+      "name": "Node3",
+      "color": "#B10DC9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 500.0646975460025,
+        "y": 369.7082725381795
+      }
+    },
+    {
+      "id": "Node4",
+      "name": "Node4",
+      "color": "#FF851B",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 602.0899417039864,
+        "y": 128.1899067328202
+      }
+    },
+    {
+      "id": "Node5",
+      "name": "Node5",
+      "color": "#0074D9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 395.6398904695257,
+        "y": 118.31280860526185
+      }
+    },
+    {
+      "id": "Node6",
+      "name": "Node6",
+      "color": "#B10DC9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 297.60486661513454,
+        "y": 179.74292584864855
+      }
+    },
+    {
+      "id": "Node7",
+      "name": "Node7",
+      "color": "#B10DC9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 462.44432239630714,
+        "y": 196.42960510600554
+      }
+    },
+    {
+      "id": "Node8",
+      "name": "Node8",
+      "color": "#B10DC9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 144.4433470694042,
+        "y": 109.98690473031692
+      }
+    },
+    {
+      "id": "Node9",
+      "name": "Node9",
+      "color": "#2ECC40",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 95.3824366534537,
+        "y": 360.71805487872774
+      }
+    },
+    {
+      "id": "Node10",
+      "name": "Node10",
+      "color": "#FF851B",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 237.25619536304512,
+        "y": 356.70393579908045
+      }
+    },
+    {
+      "id": "Node11",
+      "name": "Node11",
+      "color": "#B10DC9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 448.928171897416,
+        "y": 256.51462966775586
+      }
+    },
+    {
+      "id": "Node12",
+      "name": "Node12",
+      "color": "#0074D9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": -19.697451333693763,
+        "y": 144.01067663898417
+      }
+    },
+    {
+      "id": "Node13",
+      "name": "Node13",
+      "color": "#FF851B",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 527.9833448128959,
+        "y": 103.95829586946046
+      }
+    },
+    {
+      "id": "Node14",
+      "name": "Node14",
+      "color": "#2ECC40",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 171.0217490912002,
+        "y": 222.75429750040695
+      }
+    },
+    {
+      "id": "Node15",
+      "name": "Node15",
+      "color": "#FF851B",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 574.6670982236354,
+        "y": 211.508504049068
+      }
+    },
+    {
+      "id": "Node16",
+      "name": "Node16",
+      "color": "#2ECC40",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 300.1013337591526,
+        "y": 392.80718146681477
+      }
+    },
+    {
+      "id": "Node17",
+      "name": "Node17",
+      "color": "#B10DC9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 531.6424367315897,
+        "y": 422.6590626190996
+      }
+    },
+    {
+      "id": "Node18",
+      "name": "Node18",
+      "color": "#0074D9",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 731.1112084224158,
+        "y": 199.23106903511558
+      }
+    },
+    {
+      "id": "Node19",
+      "name": "Node19",
+      "color": "#2ECC40",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, 0],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 643.1298100711232,
+        "y": 369.95102982429466
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "source": "Node0",
+      "target": "Node1",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e1",
+      "source": "Node13",
+      "target": "Node4",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e2",
+      "source": "Node13",
+      "target": "Node5",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e3",
+      "source": "Node5",
+      "target": "Node7",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e4",
+      "source": "Node4",
+      "target": "Node7",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e5",
+      "source": "Node7",
+      "target": "Node11",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e6",
+      "source": "Node11",
+      "target": "Node3",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e7",
+      "source": "Node11",
+      "target": "Node2",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e9",
+      "source": "Node9",
+      "target": "Node10",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e11",
+      "source": "Node6",
+      "target": "Node10",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e12",
+      "source": "Node14",
+      "target": "Node10",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e13",
+      "source": "Node1",
+      "target": "Node14",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e14",
+      "source": "Node8",
+      "target": "Node14",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e15",
+      "source": "Node12",
+      "target": "Node8",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e16",
+      "source": "Node12",
+      "target": "Node1",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e17",
+      "source": "Node15",
+      "target": "Node11",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e18",
+      "source": "Node10",
+      "target": "Node16",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e19",
+      "source": "Node2",
+      "target": "Node16",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e20",
+      "source": "Node16",
+      "target": "Node0",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e21",
+      "source": "Node17",
+      "target": "Node16",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e22",
+      "source": "Node18",
+      "target": "Node15",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    },
+    {
+      "id": "e23",
+      "source": "Node19",
+      "target": "Node3",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 0]
+      }
+    }
+  ],
+  "gravity": {
+    "value": 9.81,
+    "direction": [0, 0, -1]
   }
 }
