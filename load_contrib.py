@@ -32,20 +32,20 @@ def find_load_contributors(json_data, selected_edge_id):
             {
                 "nodes": [
                     {
-                        "data": {
-                            "id": str,      # Unique node identifier
-                            "name": str,    # Node name
-                            ...            # Other node properties
-                        }
+                        "id": str,      # Unique node identifier
+                        "name": str,    # Node name
+                        ...            # Other node properties
                     },
                     ...
                 ],
                 "edges": [
                     {
-                        "data": {
-                            "id": str,      # Unique edge identifier
-                            "source": str,  # Source node ID
-                            "target": str   # Target node ID
+                        "id": str,      # Unique edge identifier
+                        "source": str,  # Source node ID
+                        "target": str,  # Target node ID
+                        "interface_properties": {
+                            "rlt_results": {...},
+                            ...
                         }
                     },
                     ...
@@ -73,27 +73,53 @@ def find_load_contributors(json_data, selected_edge_id):
             'contributors': ['Node0', 'Node1', 'Node2']
         }
     """
+    # Helper function to handle both old and new JSON formats
+    def get_node_id(node):
+        """Extract node ID from either format"""
+        if "data" in node and "id" in node["data"]:
+            return node["data"]["id"]
+        elif "id" in node:
+            return node["id"]
+        return None
+    
+    def get_edge_data(edge):
+        """Extract edge source, target, and ID from either format"""
+        if "data" in edge:
+            # Old format
+            return edge["data"].get("id"), edge["data"].get("source"), edge["data"].get("target")
+        else:
+            # New format
+            return edge.get("id"), edge.get("source"), edge.get("target")
+    
     # Step 1: Build adjacency list (source -> targets)
     graph = {}
+    
     for edge in json_data["edges"]:
-        source = edge["data"]["source"]
-        target = edge["data"]["target"]
+        edge_id, source, target = get_edge_data(edge)
+        if not source or not target:
+            continue
+            
         if source not in graph:
             graph[source] = []
         graph[source].append(target)
     
     # Step 2: Identify grounded node (node with no outgoing edges)
-    all_nodes = set(n["data"]["id"] for n in json_data["nodes"])
+    all_nodes = set(get_node_id(n) for n in json_data["nodes"] if get_node_id(n) is not None)
     grounded = all_nodes - set(graph.keys())  # Nodes with no outgoing edges
     grounded_node = grounded.pop() if grounded else None
     print(f"Grounded node: {grounded_node}")
     
     # Step 3: Check if the selected edge ID exists
-    edges_with_id = [e["data"] for e in json_data["edges"] if e["data"]["id"] == selected_edge_id]
-    if not edges_with_id:
+    selected_edge = None
+    for edge in json_data["edges"]:
+        edge_id, source, target = get_edge_data(edge)
+        if edge_id == selected_edge_id:
+            selected_edge = {"id": edge_id, "source": source, "target": target}
+            break
+            
+    if not selected_edge:
         print(f"Error: Edge with ID '{selected_edge_id}' not found in the JSON data.")
         return None
-    selected_edge = edges_with_id[0]
     
     # Step 4: Trace upstream nodes to find load contributors
     contributors = set()
@@ -108,9 +134,10 @@ def find_load_contributors(json_data, selected_edge_id):
             Adds discovered nodes to the contributors set
         """
         contributors.add(node)
-        for e in json_data["edges"]:
-            if e["data"]["target"] == node:
-                trace_upstream(e["data"]["source"])
+        for edge in json_data["edges"]:
+            edge_id, source, target = get_edge_data(edge)
+            if target == node:
+                trace_upstream(source)
     
     trace_upstream(selected_edge["source"])
     
@@ -125,7 +152,7 @@ def find_load_contributors(json_data, selected_edge_id):
 # Example usage
 if __name__ == "__main__":
     import json
-    with open("load_path_data_20250321_000033.json") as f:
+    with open("car_suspension/car_suspension_system_varied.json") as f:
         json_data = json.load(f)
-    result = find_load_contributors(json_data, "e20")
+    result = find_load_contributors(json_data, "e10")
     print(result)
