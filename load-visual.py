@@ -622,6 +622,18 @@ def handle_node_click(node_data, click_state, graph_data):
                 except ValueError:
                     continue
         
+        # Get source and target node positions
+        source_node = next((node for node in graph_data['nodes'] if node['data']['id'] == first_id), None)
+        target_node = next((node for node in graph_data['nodes'] if node['data']['id'] == clicked_id), None)
+        
+        # Calculate a sensible default position for the interface, halfway between the nodes
+        interface_position = [0.0, 0.0, 0.0]
+        if source_node and target_node:
+            source_trans = source_node['data'].get('translation', [0.0, 0.0, 0.0])
+            target_trans = target_node['data'].get('translation', [0.0, 0.0, 0.0])
+            # Take the average position between the nodes
+            interface_position = [(s + t) / 2 for s, t in zip(source_trans, target_trans)]
+        
         # Create new edge with next sequential ID and RLT results
         edge_id = f'e{max_edge_num + 1}'
         new_edge = {
@@ -634,7 +646,11 @@ def handle_node_click(node_data, click_state, graph_data):
                     'moment': [0.0, 0.0, 0.0],
                     'is_valid': False,
                     'timestamp': datetime.datetime.now().isoformat()
-                }
+                },
+                # Store interface properties in the edge data for later export
+                'interface_euler_angles': [0.0, 0.0, 0.0],
+                'interface_rotation_order': 'xyz',
+                'interface_position': interface_position
             }
         }
         
@@ -920,7 +936,7 @@ def export_json(n_clicks, data, elements):
         node_data['id'] = node_data.get('name', node_data['id'])
         
         # Get current position from cytoscape if available
-        position = current_positions.get(node_data['id'], {'x': 0, 'y': 0})
+        position = current_positions.get(node_data['id'], node.get('position', {'x': 0, 'y': 0}))
         
         # Create node in the new format without 'data' nesting
         export_node = {
@@ -947,6 +963,11 @@ def export_json(n_clicks, data, elements):
         if 'id' not in edge_data:
             edge_data['id'] = f"e{len(export_data['edges'])}"
         
+        # Get interface properties if they exist, or use defaults
+        interface_euler_angles = edge_data.get('interface_euler_angles', [0, 0, 0])
+        interface_rotation_order = edge_data.get('interface_rotation_order', 'xyz')
+        interface_position = edge_data.get('interface_position', [0, 0, 0])
+        
         # Create edge in the new format with interface_properties
         export_edge = {
             'id': edge_data['id'],
@@ -959,9 +980,9 @@ def export_json(n_clicks, data, elements):
                     'is_valid': False,
                     'timestamp': datetime.datetime.now().isoformat()
                 }),
-                'euler_angles': [0, 0, 0],  # Default values for new format
-                'rotation_order': 'xyz',    # Default values for new format
-                'position': [0, 0, 0]       # Default values for new format
+                'euler_angles': interface_euler_angles,
+                'rotation_order': interface_rotation_order,
+                'position': interface_position
             }
         }
         
@@ -1046,7 +1067,12 @@ def import_json(contents, filename):
                         'rotation_order': node.get('rotation_order', 'xyz'),
                         'translation': node.get('translation', [0.0, 0.0, 0.0])
                     }
-                    position = node.get('position', {'x': random.uniform(100, 800), 'y': random.uniform(100, 500)})
+                    
+                    # Preserve the position from imported data
+                    if 'position' in node and isinstance(node['position'], dict):
+                        position = node['position']
+                    else:
+                        position = {'x': random.uniform(100, 800), 'y': random.uniform(100, 500)}
                 
                 # Ensure all required fields exist with default values
                 if 'color' not in node_data:
@@ -1081,8 +1107,10 @@ def import_json(contents, filename):
                     # Old format
                     edge_data = edge['data'].copy()
                 else:
-                    # New format
+                    # New format - extract interface_properties
                     interface_props = edge.get('interface_properties', {})
+                    
+                    # Extract rlt_results while preserving all its fields
                     rlt_results = interface_props.get('rlt_results', {
                         'force': [0.0, 0.0, 0.0],
                         'moment': [0.0, 0.0, 0.0],
@@ -1094,7 +1122,11 @@ def import_json(contents, filename):
                         'id': edge.get('id', f'e{i}'),
                         'source': edge.get('source', ''),
                         'target': edge.get('target', ''),
-                        'rlt_results': rlt_results
+                        'rlt_results': rlt_results,
+                        # Preserve interface properties for edge creation
+                        'interface_euler_angles': interface_props.get('euler_angles', [0.0, 0.0, 0.0]),
+                        'interface_rotation_order': interface_props.get('rotation_order', 'xyz'),
+                        'interface_position': interface_props.get('position', [0.0, 0.0, 0.0])
                     }
                 
                 # Make sure edge has an ID
