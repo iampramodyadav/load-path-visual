@@ -14,8 +14,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 264.1838382969312,
-        "y": 510.3127521938834
+        "x": 291.7683852727316,
+        "y": 484.6305877681383
       }
     },
     {
@@ -32,8 +32,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 17.9801880349809,
-        "y": 290.9307387368885
+        "x": -72.07031376415044,
+        "y": 251.58613685227706
       }
     },
     {
@@ -50,8 +50,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 338.37289848896415,
-        "y": 373.4941856912386
+        "x": 327.90979446366055,
+        "y": 318.32509173963797
       }
     },
     {
@@ -68,8 +68,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 453.88848053610417,
-        "y": 248.953823291746
+        "x": 500.0646975460025,
+        "y": 369.7082725381795
       }
     },
     {
@@ -86,8 +86,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 603.2943023583681,
-        "y": 157.03448529265754
+        "x": 602.0899417039864,
+        "y": 128.1899067328202
       }
     },
     {
@@ -104,8 +104,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 696.1990301855736,
-        "y": 234.6592635173644
+        "x": 395.6398904695257,
+        "y": 118.31280860526185
       }
     },
     {
@@ -122,8 +122,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 265.2643632641961,
-        "y": 210.18104664953165
+        "x": 297.60486661513454,
+        "y": 179.74292584864855
       }
     },
     {
@@ -140,8 +140,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 567.0753626493429,
-        "y": 252.5498903326338
+        "x": 462.44432239630714,
+        "y": 196.42960510600554
       }
     },
     {
@@ -158,8 +158,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 59.78732359194802,
-        "y": 209.86198860821466
+        "x": 144.4433470694042,
+        "y": 109.98690473031692
       }
     },
     {
@@ -176,8 +176,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 145.79557422991638,
-        "y": 329.328742802817
+        "x": 95.3824366534537,
+        "y": 360.71805487872774
       }
     },
     {
@@ -212,8 +212,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 481.90329096497453,
-        "y": 363.5003032685718
+        "x": 448.928171897416,
+        "y": 256.51462966775586
       }
     },
     {
@@ -230,8 +230,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": -52.98914595965968,
-        "y": 235.32503904163354
+        "x": -19.697451333693763,
+        "y": 144.01067663898417
       }
     },
     {
@@ -248,8 +248,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 785.7561803453746,
-        "y": 144.85952069564718
+        "x": 527.9833448128959,
+        "y": 103.95829586946046
       }
     },
     {
@@ -284,8 +284,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 710.5291627733785,
-        "y": 333.29417376252735
+        "x": 574.6670982236354,
+        "y": 211.508504049068
       }
     },
     {
@@ -302,8 +302,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 280.1263169835731,
-        "y": 433.7084062930015
+        "x": 300.1013337591526,
+        "y": 392.80718146681477
       }
     },
     {
@@ -320,8 +320,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 464.1078562046303,
-        "y": 453.0971834199827
+        "x": 531.6424367315897,
+        "y": 422.6590626190996
       }
     },
     {
@@ -338,8 +338,8 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 734.9159735225261,
-        "y": 443.6872267172082
+        "x": 731.1112084224158,
+        "y": 199.23106903511558
       }
     },
     {
@@ -356,98 +356,307 @@
         "translation": [0, 0, 0]
       },
       "position": {
-        "x": 404.38080003919674,
-        "y": 146.42108019280946
+        "x": 643.1298100711232,
+        "y": 369.95102982429466
       }
     }
   ],
-  "edges": [{
+  "edges": [
+    {
       "data": {
-        "id": "e0", "source": "Node13", "target": "Node4"
+        "id": "e0",
+        "source": "Node13",
+        "target": "Node4",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e1", "source": "Node13", "target": "Node5"
+        "id": "e1",
+        "source": "Node13",
+        "target": "Node5",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e2", "source": "Node5", "target": "Node7"
+        "id": "e2",
+        "source": "Node5",
+        "target": "Node7",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e3", "source": "Node4", "target": "Node7"
+        "id": "e3",
+        "source": "Node4",
+        "target": "Node7",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e4", "source": "Node7", "target": "Node11"
+        "id": "e4",
+        "source": "Node7",
+        "target": "Node11",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e5", "source": "Node11", "target": "Node3"
+        "id": "e5",
+        "source": "Node11",
+        "target": "Node3",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e6", "source": "Node3", "target": "Node2"
+        "id": "e6",
+        "source": "Node3",
+        "target": "Node2",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e7", "source": "Node11", "target": "Node2"
+        "id": "e7",
+        "source": "Node11",
+        "target": "Node2",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e9", "source": "Node9", "target": "Node10"
+        "id": "e9",
+        "source": "Node9",
+        "target": "Node10",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e11", "source": "Node6", "target": "Node10"
+        "id": "e11",
+        "source": "Node6",
+        "target": "Node10",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e12", "source": "Node14", "target": "Node10"
+        "id": "e12",
+        "source": "Node14",
+        "target": "Node10",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e13", "source": "Node1", "target": "Node14"
+        "id": "e13",
+        "source": "Node1",
+        "target": "Node14",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e14", "source": "Node8", "target": "Node14"
+        "id": "e14",
+        "source": "Node8",
+        "target": "Node14",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e15", "source": "Node12", "target": "Node8"
+        "id": "e15",
+        "source": "Node12",
+        "target": "Node8",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e16", "source": "Node12", "target": "Node1"
+        "id": "e16",
+        "source": "Node12",
+        "target": "Node1",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e17", "source": "Node15", "target": "Node11"
+        "id": "e17",
+        "source": "Node15",
+        "target": "Node11",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e18", "source": "Node10", "target": "Node16"
+        "id": "e18",
+        "source": "Node10",
+        "target": "Node16",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e19", "source": "Node2", "target": "Node16"
+        "id": "e19",
+        "source": "Node2",
+        "target": "Node16",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e20", "source": "Node16", "target": "Node0"
+        "id": "e20",
+        "source": "Node16",
+        "target": "Node0",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e21", "source": "Node17", "target": "Node16"
+        "id": "e21",
+        "source": "Node17",
+        "target": "Node16",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e22", "source": "Node18", "target": "Node15"
+        "id": "e22",
+        "source": "Node18",
+        "target": "Node15",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }, {
+    },
+    {
       "data": {
-        "id": "e23", "source": "Node19", "target": "Node3"
+        "id": "e23",
+        "source": "Node19",
+        "target": "Node3",
+        "rlt_results": {
+          "force": [0, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": false,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        }
       }
-    }]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "coordinate_system": "right-handed",
+    "units": {
+      "force": "N",
+      "moment": "Nm",
+      "mass": "kg",
+      "distance": "mm"
+    }
+  }
 }
