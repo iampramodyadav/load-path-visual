@@ -1,0 +1,341 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "coordinate_system": "right-handed",
+    "units": {
+      "force": "N",
+      "moment": "Nm",
+      "mass": "kg",
+      "distance": "mm"
+    },
+    "description": "Front Suspension System for Vehicle"
+  },
+  "nodes": [
+    {
+      "id": "Chassis",
+      "name": "Chassis",
+      "color": "#0074D9",
+      "mass": 1250,
+      "cog": [0, 0, 450],
+      "external_force": [0, 0, -12262.5],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 0],
+      "position": {
+        "x": 400,
+        "y": 150
+      }
+    },
+    {
+      "id": "UpperControlArm",
+      "name": "Upper Control Arm",
+      "color": "#FF851B",
+      "mass": 5.2,
+      "cog": [0, -120, 0],
+      "external_force": [0, 0, -51.012],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, -200, 450],
+      "position": {
+        "x": 300,
+        "y": 250
+      }
+    },
+    {
+      "id": "LowerControlArm",
+      "name": "Lower Control Arm",
+      "color": "#FF851B",
+      "mass": 7.8,
+      "cog": [0, -150, 0],
+      "external_force": [0, 0, -76.518],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, -200, 300],
+      "position": {
+        "x": 300,
+        "y": 350
+      }
+    },
+    {
+      "id": "SteeringKnuckle",
+      "name": "Steering Knuckle",
+      "color": "#B10DC9",
+      "mass": 8.5,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, -83.385],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, -400, 350],
+      "position": {
+        "x": 200,
+        "y": 300
+      }
+    },
+    {
+      "id": "TieRod",
+      "name": "Tie Rod",
+      "color": "#2ECC40",
+      "mass": 1.2,
+      "cog": [0, -75, 0],
+      "external_force": [0, 0, -11.772],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, -300, 375],
+      "position": {
+        "x": 150,
+        "y": 200
+      }
+    },
+    {
+      "id": "SteeringRack",
+      "name": "Steering Rack",
+      "color": "#2ECC40",
+      "mass": 4.2,
+      "cog": [0, 0, 0],
+      "external_force": [0, 0, -41.202],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, 0, 375],
+      "position": {
+        "x": 400,
+        "y": 200
+      }
+    },
+    {
+      "id": "ShockAbsorber",
+      "name": "Shock Absorber",
+      "color": "#B10DC9",
+      "mass": 3.5,
+      "cog": [0, -150, 50],
+      "external_force": [0, 0, -34.335],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, -250, 400],
+      "position": {
+        "x": 400,
+        "y": 300
+      }
+    },
+    {
+      "id": "Wheel",
+      "name": "Wheel",
+      "color": "#FF4136",
+      "mass": 22.5,
+      "cog": [0, -75, 0],
+      "external_force": [0, 3000, -220.725],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, -450, 350],
+      "position": {
+        "x": 100,
+        "y": 300
+      }
+    },
+    {
+      "id": "Ground",
+      "name": "Ground",
+      "color": "#001f3f",
+      "mass": 0,
+      "cog": [0, 0, 0],
+      "external_force": [0, -3000, 12781.5],
+      "moment": [0, 0, 0],
+      "euler_angles": [0, 0, 0],
+      "rotation_order": "xyz",
+      "translation": [0, -450, 0],
+      "position": {
+        "x": 100,
+        "y": 450
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "source": "Chassis",
+      "target": "UpperControlArm",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, -1500],
+          "moment": [0, 200, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -100, 450]
+      }
+    },
+    {
+      "id": "e1",
+      "source": "Chassis",
+      "target": "LowerControlArm",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, -2800],
+          "moment": [0, 300, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -100, 300]
+      }
+    },
+    {
+      "id": "e2",
+      "source": "UpperControlArm",
+      "target": "SteeringKnuckle",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, -850],
+          "moment": [0, 75, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -400, 450]
+      }
+    },
+    {
+      "id": "e3",
+      "source": "LowerControlArm",
+      "target": "SteeringKnuckle",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, -1650],
+          "moment": [0, 120, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -400, 300]
+      }
+    },
+    {
+      "id": "e4",
+      "source": "TieRod",
+      "target": "SteeringKnuckle",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [120, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -400, 375]
+      }
+    },
+    {
+      "id": "e5",
+      "source": "TieRod",
+      "target": "SteeringRack",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [-120, 0, 0],
+          "moment": [0, 0, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -150, 375]
+      }
+    },
+    {
+      "id": "e6",
+      "source": "SteeringRack",
+      "target": "Chassis",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, -41.202],
+          "moment": [0, 0, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, 0, 375]
+      }
+    },
+    {
+      "id": "e7",
+      "source": "ShockAbsorber",
+      "target": "Chassis",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, -2100],
+          "moment": [0, 0, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -150, 500]
+      }
+    },
+    {
+      "id": "e8",
+      "source": "ShockAbsorber",
+      "target": "LowerControlArm",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, 2065.665],
+          "moment": [0, 0, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -350, 300]
+      }
+    },
+    {
+      "id": "e9",
+      "source": "SteeringKnuckle",
+      "target": "Wheel",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, 0, -2500],
+          "moment": [0, 0, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -450, 350]
+      }
+    },
+    {
+      "id": "e10",
+      "source": "Wheel",
+      "target": "Ground",
+      "interface_properties": {
+        "rlt_results": {
+          "force": [0, -3000, 2720.725],
+          "moment": [0, 0, 0],
+          "is_valid": true,
+          "timestamp": "2025-03-22T22:10:53.824991"
+        },
+        "euler_angles": [0, 0, 0],
+        "rotation_order": "xyz",
+        "position": [0, -450, 0]
+      }
+    }
+  ],
+  "gravity": {
+    "value": 9.81,
+    "direction": [0, 0, -1]
+  }
+} 
