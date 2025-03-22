@@ -32,6 +32,60 @@ import re  # Add regex for JSON formatting
 
 app = dash.Dash(__name__)
 
+# =============================================================================
+# Step 1: Create Unified Data Model
+# =============================================================================
+
+# Task 1.1: Merge JSON schemas from both tools
+# -----------------------------------------------------------------------------
+
+# Define the base node structure with RTL-required properties
+DEFAULT_NODE_TEMPLATE = {
+    "data": {
+        "id": "",
+        "name": "",
+        "color": "#FF4136",
+        # Load Path properties
+        # position: handled separately in cytoscape element
+        # RLT-required properties (3D mechanical properties)
+        "mass": 0.0,                    # Mass in kg
+        "cog": [0.0, 0.0, 0.0],         # Center of gravity (local coordinates)
+        "external_force": [0.0, 0.0, 0.0],  # Applied force [Fx, Fy, Fz]
+        "moment": [0.0, 0.0, 0.0],      # Applied moment [Mx, My, Mz]
+        "translation": [0.0, 0.0, 0.0],  # 3D position [X, Y, Z]
+        "euler_angles": [0.0, 0.0, 0.0], # Rotation angles in degrees
+        "rotation_order": "xyz"          # Rotation convention
+    }
+}
+
+# Define the base edge structure with RLT results field
+DEFAULT_EDGE_TEMPLATE = {
+    "data": {
+        "id": "e0",
+        "source": "",
+        "target": "",
+        # New RLT results field
+        "rlt_results": {
+            "force": [0.0, 0.0, 0.0],    # Transferred force [Fx, Fy, Fz]
+            "moment": [0.0, 0.0, 0.0],   # Transferred moment [Mx, My, Mz]
+            "is_valid": False,           # Calculation status flag
+            "timestamp": None            # Last calculation time
+        }
+    }
+}
+
+# Helper functions for data validation
+def validate_node(node):
+    """Validates that a node has all required RLT properties"""
+    required = ["mass", "cog", "external_force", "moment", 
+               "translation", "euler_angles", "rotation_order"]
+    return all(key in node["data"] for key in required)
+
+def validate_edge(edge):
+    """Validates that an edge has all required RLT properties"""
+    required = ["source", "target", "rlt_results"]
+    return all(key in edge["data"] for key in required)
+
 # Add node property input fields
 node_properties = html.Div([
     html.H3("Node Properties"),
@@ -179,13 +233,33 @@ node_properties_table = html.Div([
 
 app.layout = html.Div([
     # Store for graph data
-    dcc.Store(id='graph-data', data={'nodes': [], 'edges': []}),
+    dcc.Store(id='unified-data-store', data={
+        "nodes": [], 
+        "edges": [],
+        "metadata": {
+            "version": "1.0",
+            "coordinate_system": "right-handed",
+            "units": {
+                "force": "N",
+                "moment": "Nm",
+                "mass": "kg",
+                "distance": "mm"
+            }
+        }
+    }),
+    
     # Store for node positions
     dcc.Store(id='node-positions', data={}),
     # Store for downloaded JSON
     dcc.Download(id='download-json'),
     # Store for selected node
     dcc.Store(id='selected-node', data=None),
+    # Add store for tracking selected edge
+    dcc.Store(id='selected-edge-store', data={
+        "edge_id": None,
+        "source_node": None,
+        "target_node": None
+    }),
     
     html.H1("Load Path Visual Tool", style={'textAlign': 'center'}),
     
@@ -268,9 +342,9 @@ app.layout = html.Div([
 
 # Callback to add nodes on button click
 @app.callback(
-    Output('graph-data', 'data'),
+    Output('unified-data-store', 'data'),
     Input('add-node-btn', 'n_clicks'),
-    State('graph-data', 'data')
+    State('unified-data-store', 'data')
 )
 def add_node(n_clicks, data):
     """
@@ -282,12 +356,6 @@ def add_node(n_clicks, data):
         
     Returns:
         dict: Updated graph data with the new node added
-        
-    The function:
-    1. Generates a unique node name (Node0, Node1, etc.)
-    2. Assigns random position and color
-    3. Initializes default mechanical properties (mass, forces, etc.)
-    4. Adds the node to the graph data
     """
     if not n_clicks:
         return dash.no_update
@@ -305,22 +373,25 @@ def add_node(n_clicks, data):
     # Random position for button click
     pos_x = random.uniform(100, 800)
     pos_y = random.uniform(100, 500)
-        
-    data['nodes'].append({
+    
+    # Create new node using the DEFAULT_NODE_TEMPLATE
+    new_node = {
         'data': {
             'id': node_name,  # Use name as ID for simplicity
             'name': node_name,
             'color': random.choice(colors),
-            'mass': 0,  # Default values
-            'cog': [0, 0, 0],
-            'external_force': [0, 0, 0],
-            'moment': [0, 0, 0],
-            'euler_angles': [0, 0, 0],
+            'mass': 0.0,  # Default values
+            'cog': [0.0, 0.0, 0.0],
+            'external_force': [0.0, 0.0, 0.0],
+            'moment': [0.0, 0.0, 0.0],
+            'euler_angles': [0.0, 0.0, 0.0],
             'rotation_order': 'xyz',
-            'translation': [0, 0, 0]
+            'translation': [0.0, 0.0, 0.0]
         },
         'position': {'x': pos_x, 'y': pos_y}
-    })
+    }
+    
+    data['nodes'].append(new_node)
     return data
 
 # Store selected node
@@ -344,11 +415,11 @@ def store_selected_node(node_data):
 
 # Callback to delete selected node
 @app.callback(
-    [Output('graph-data', 'data', allow_duplicate=True),
+    [Output('unified-data-store', 'data', allow_duplicate=True),
      Output('click-data', 'children', allow_duplicate=True)],
     Input('delete-node-btn', 'n_clicks'),
     State('selected-node', 'data'),
-    State('graph-data', 'data'),
+    State('unified-data-store', 'data'),
     prevent_initial_call=True
 )
 def delete_node(n_clicks, selected_node_id, graph_data):
@@ -386,7 +457,7 @@ def delete_node(n_clicks, selected_node_id, graph_data):
 # Callback to update cytoscape with stored data while preserving positions
 @app.callback(
     Output('cytoscape', 'elements'),
-    [Input('graph-data', 'data')],
+    [Input('unified-data-store', 'data')],
     [State('cytoscape', 'elements')]
 )
 def update_cytoscape(data, current_elements):
@@ -480,11 +551,11 @@ def store_node_positions(tap_data, mouseover_data, elements, positions):
 
 # Callback to handle node connections
 @app.callback(
-    [Output('graph-data', 'data', allow_duplicate=True),
+    [Output('unified-data-store', 'data', allow_duplicate=True),
      Output('click-data', 'children')],
     Input('cytoscape', 'tapNodeData'),
     State('click-data', 'children'),
-    State('graph-data', 'data'),
+    State('unified-data-store', 'data'),
     prevent_initial_call=True
 )
 def handle_node_click(node_data, click_state, graph_data):
@@ -498,12 +569,6 @@ def handle_node_click(node_data, click_state, graph_data):
         
     Returns:
         tuple: (Updated graph data, Status message)
-        
-    The function:
-    1. Manages the two-click process for creating edges
-    2. Validates node existence and prevents self-loops
-    3. Handles edge recreation and updates
-    4. Maintains sequential edge IDs (e0, e1, etc.)
     """
     if not node_data or 'id' not in node_data:
         return dash.no_update, dash.no_update
@@ -548,24 +613,32 @@ def handle_node_click(node_data, click_state, graph_data):
                 except ValueError:
                     continue
         
-        # Create new edge with next sequential ID
+        # Create new edge with next sequential ID and RLT results
         edge_id = f'e{max_edge_num + 1}'
         new_edge = {
             'data': {
                 'id': edge_id,
                 'source': first_id,
-                'target': clicked_id
+                'target': clicked_id,
+                'rlt_results': {
+                    'force': [0.0, 0.0, 0.0],
+                    'moment': [0.0, 0.0, 0.0],
+                    'is_valid': False,
+                    'timestamp': datetime.datetime.now().isoformat()
+                }
             }
         }
         
         # Add the new edge
         graph_data['edges'].append(new_edge)
+        
+        # Also update the selected edge store
         return graph_data, "Connection created. Click a node to start new connection."
 
 # Callback to display connection list
 @app.callback(
     Output('connection-list', 'children'),
-    Input('graph-data', 'data')
+    Input('unified-data-store', 'data')
 )
 def update_connection_list(data):
     """
@@ -593,10 +666,10 @@ def update_connection_list(data):
 
 # Callback to handle connection deletion
 @app.callback(
-    [Output('graph-data', 'data', allow_duplicate=True),
+    [Output('unified-data-store', 'data', allow_duplicate=True),
      Output('click-data', 'children', allow_duplicate=True)],
     Input('cytoscape', 'tapEdgeData'), 
-    State('graph-data', 'data'),
+    State('unified-data-store', 'data'),
     prevent_initial_call=True
 )
 def delete_connection(edge_data, graph_data):
@@ -622,7 +695,7 @@ def delete_connection(edge_data, graph_data):
 
 # Callback to update node properties
 @app.callback(
-    Output('graph-data', 'data', allow_duplicate=True),
+    Output('unified-data-store', 'data', allow_duplicate=True),
     Input('update-node-btn', 'n_clicks'),
     [State('select-node-dropdown', 'value'),  # Get currently selected node
      State('node-name-input', 'value')] +
@@ -634,7 +707,7 @@ def delete_connection(edge_data, graph_data):
       'euler-x', 'euler-y', 'euler-z',
       'trans-x', 'trans-y', 'trans-z']] +
     [State('rotation-order', 'value'),
-     State('graph-data', 'data'),
+     State('unified-data-store', 'data'),
      State('cytoscape', 'elements')],
     prevent_initial_call=True
 )
@@ -710,7 +783,7 @@ def update_node_properties(n_clicks, selected_node_id, new_name,
 # Callback to update node properties table
 @app.callback(
     Output('node-properties-table', 'data'),
-    Input('graph-data', 'data')
+    Input('unified-data-store', 'data')
 )
 def update_node_properties_table(data):
     table_data = []
@@ -780,13 +853,13 @@ def format_json_compact_arrays(json_str):
 @app.callback(
     Output('download-json', 'data'),
     Input('export-json-btn', 'n_clicks'),
-    State('graph-data', 'data'),
-    State('cytoscape', 'elements'),  # Add elements state to get current positions
+    State('unified-data-store', 'data'),
+    State('cytoscape', 'elements'),
     prevent_initial_call=True
 )
 def export_json(n_clicks, data, elements):
     """
-    Exports the current graph to a JSON file.
+    Exports the current graph to a JSON file with the unified data structure.
     
     Args:
         n_clicks (int): Number of times the export button has been clicked
@@ -795,12 +868,6 @@ def export_json(n_clicks, data, elements):
         
     Returns:
         dict: Dictionary containing the formatted JSON content and filename
-        
-    The function:
-    1. Preserves current node positions
-    2. Maintains node and edge IDs
-    3. Creates a timestamped filename
-    4. Formats arrays for readability
     """
     if not n_clicks:
         return dash.no_update
@@ -816,12 +883,26 @@ def export_json(n_clicks, data, elements):
             if 'position' in element and 'data' in element and 'id' in element['data']:
                 current_positions[element['data']['id']] = element['position']
     
-    # Clean up the data structure before export
-    export_data = {'nodes': [], 'edges': []}
+    # Clone the data to avoid modifying the original
+    export_data = {
+        'nodes': [],
+        'edges': [],
+        'metadata': data.get('metadata', {
+            "version": "1.0",
+            "coordinate_system": "right-handed",
+            "units": {
+                "force": "N",
+                "moment": "Nm",
+                "mass": "kg",
+                "distance": "mm"
+            }
+        })
+    }
     
     # Process nodes with current positions
     for node in data['nodes']:
         node_data = node['data'].copy()
+        
         # Make sure node ID is the same as name to keep things consistent
         node_data['id'] = node_data['name']
         
@@ -833,11 +914,18 @@ def export_json(n_clicks, data, elements):
             'position': position
         })
     
-    # Process edges with IDs
-    for i, edge in enumerate(data['edges']):
+    # Process edges with IDs and RLT results
+    for edge in data['edges']:
         edge_data = edge['data'].copy()
-        if 'id' not in edge_data:
-            edge_data['id'] = f'e{i}'
+        
+        # Make sure rlt_results is present
+        if 'rlt_results' not in edge_data:
+            edge_data['rlt_results'] = {
+                'force': [0.0, 0.0, 0.0],
+                'moment': [0.0, 0.0, 0.0],
+                'is_valid': False,
+                'timestamp': datetime.datetime.now().isoformat()
+            }
         
         export_data['edges'].append({
             'data': edge_data
@@ -856,7 +944,7 @@ def export_json(n_clicks, data, elements):
 
 # Callback to import graph data from JSON
 @app.callback(
-    [Output('graph-data', 'data', allow_duplicate=True),
+    [Output('unified-data-store', 'data', allow_duplicate=True),
      Output('json-output', 'children')],
     Input('upload-json', 'contents'),
     State('upload-json', 'filename'),
@@ -864,7 +952,7 @@ def export_json(n_clicks, data, elements):
 )
 def import_json(contents, filename):
     """
-    Imports graph data from a JSON file.
+    Imports graph data from a JSON file with the unified data structure.
     
     Args:
         contents (str): Base64 encoded file contents
@@ -872,13 +960,6 @@ def import_json(contents, filename):
         
     Returns:
         tuple: (Processed graph data, Status message)
-        
-    The function:
-    1. Decodes and validates JSON data
-    2. Processes nodes with all required properties
-    3. Preserves node positions from the file
-    4. Validates and processes edges
-    5. Ensures ID consistency
     """
     if contents is None:
         return dash.no_update, dash.no_update
@@ -893,11 +974,24 @@ def import_json(contents, filename):
             imported_data = json.loads(decoded)
             
             # Process the imported data
-            processed_data = {'nodes': [], 'edges': []}
+            processed_data = {
+                'nodes': [], 
+                'edges': [],
+                'metadata': imported_data.get('metadata', {
+                    "version": "1.0",
+                    "coordinate_system": "right-handed",
+                    "units": {
+                        "force": "N",
+                        "moment": "Nm",
+                        "mass": "kg",
+                        "distance": "mm"
+                    }
+                })
+            }
             
             # Process nodes
-            for node in imported_data['nodes']:
-                node_data = node['data'].copy()
+            for node in imported_data.get('nodes', []):
+                node_data = node.get('data', {}).copy()
                 
                 # Make sure ID exists and is the same as name for consistency
                 if 'name' in node_data:
@@ -907,19 +1001,19 @@ def import_json(contents, filename):
                 if 'color' not in node_data:
                     node_data['color'] = random.choice(['#FF4136', '#2ECC40', '#0074D9', '#FF851B', '#B10DC9'])
                 if 'mass' not in node_data:
-                    node_data['mass'] = 0
+                    node_data['mass'] = 0.0
                 if 'cog' not in node_data:
-                    node_data['cog'] = [0, 0, 0]
+                    node_data['cog'] = [0.0, 0.0, 0.0]
                 if 'external_force' not in node_data:
-                    node_data['external_force'] = [0, 0, 0]
+                    node_data['external_force'] = [0.0, 0.0, 0.0]
                 if 'moment' not in node_data:
-                    node_data['moment'] = [0, 0, 0]
+                    node_data['moment'] = [0.0, 0.0, 0.0]
                 if 'euler_angles' not in node_data:
-                    node_data['euler_angles'] = [0, 0, 0]
+                    node_data['euler_angles'] = [0.0, 0.0, 0.0]
                 if 'rotation_order' not in node_data:
                     node_data['rotation_order'] = 'xyz'
                 if 'translation' not in node_data:
-                    node_data['translation'] = [0, 0, 0]
+                    node_data['translation'] = [0.0, 0.0, 0.0]
                 
                 # Preserve the exact position from the imported data
                 position = node.get('position', {'x': random.uniform(100, 800), 'y': random.uniform(100, 500)})
@@ -932,15 +1026,24 @@ def import_json(contents, filename):
             valid_node_ids = {node['data']['id'] for node in processed_data['nodes']}
             
             # Process edges
-            for i, edge in enumerate(imported_data['edges']):
-                edge_data = edge['data'].copy()
+            for i, edge in enumerate(imported_data.get('edges', [])):
+                edge_data = edge.get('data', {}).copy()
                 
                 # Make sure edge has an ID
                 if 'id' not in edge_data:
                     edge_data['id'] = f'e{i}'
+                
+                # Add RLT results if not present
+                if 'rlt_results' not in edge_data:
+                    edge_data['rlt_results'] = {
+                        'force': [0.0, 0.0, 0.0],
+                        'moment': [0.0, 0.0, 0.0],
+                        'is_valid': False,
+                        'timestamp': datetime.datetime.now().isoformat()
+                    }
                     
                 # Only add edges that connect to valid nodes
-                if edge_data['source'] in valid_node_ids and edge_data['target'] in valid_node_ids:
+                if edge_data.get('source') in valid_node_ids and edge_data.get('target') in valid_node_ids:
                     processed_data['edges'].append({
                         'data': edge_data
                     })
@@ -954,7 +1057,7 @@ def import_json(contents, filename):
 # Callback to update node dropdown options
 @app.callback(
     Output('select-node-dropdown', 'options'),
-    Input('graph-data', 'data')
+    Input('unified-data-store', 'data')
 )
 def update_node_dropdown(data):
     return [{'label': node['data']['name'], 'value': node['data']['id']} for node in data['nodes']]
@@ -980,7 +1083,7 @@ def update_node_dropdown(data):
      Output('node-moment-y-input', 'value'),
      Output('node-moment-z-input', 'value')],
     Input('select-node-dropdown', 'value'),
-    State('graph-data', 'data')
+    State('unified-data-store', 'data')
 )
 def update_input_fields(selected_id, graph_data):
     if not selected_id:
@@ -1011,6 +1114,44 @@ def update_input_fields(selected_id, graph_data):
             ]
     
     return [None] * 18  # Return None for all outputs if node not found
+
+# Callback to handle selected edge
+@app.callback(
+    Output('selected-edge-store', 'data'),
+    Input('cytoscape', 'tapEdgeData'),
+    State('unified-data-store', 'data')
+)
+def handle_edge_selection(edge_data, graph_data):
+    """
+    Stores information about a selected edge for RLT calculations.
+    
+    Args:
+        edge_data (dict): Data of the selected edge
+        graph_data (dict): Current graph data
+        
+    Returns:
+        dict: Updated selected edge information
+    """
+    if not edge_data or 'id' not in edge_data:
+        return {
+            "edge_id": None,
+            "source_node": None,
+            "target_node": None
+        }
+    
+    edge_id = edge_data['id']
+    source_id = edge_data['source']
+    target_id = edge_data['target']
+    
+    # Find the source and target nodes in the graph data
+    source_node = next((node for node in graph_data['nodes'] if node['data']['id'] == source_id), None)
+    target_node = next((node for node in graph_data['nodes'] if node['data']['id'] == target_id), None)
+    
+    return {
+        "edge_id": edge_id,
+        "source_node": source_node,
+        "target_node": target_node
+    }
 
 if __name__ == '__main__':
     app.run_server(port=r'8051', debug=True)
