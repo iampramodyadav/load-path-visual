@@ -176,7 +176,8 @@ graph_builder = html.Div([
     html.Div(id='connection-list'),
     html.Div([
         html.Button("Export to JSON", id='export-json-btn', n_clicks=0),
-        html.Button("Import from JSON", id='import-json-btn', n_clicks=0),
+        html.Button("Export as HTML", id='export-html-btn', n_clicks=0, style={'margin-left': '10px'}),
+        html.Button("Import from JSON", id='import-json-btn', n_clicks=0, style={'margin-left': '10px'}),
         dcc.Upload(
             id='upload-json',
             children=html.Div(['Drag and Drop or ', html.A('Select a JSON File')]),
@@ -261,6 +262,8 @@ app.layout = html.Div([
     dcc.Store(id='node-positions', data={}),
     # Store for downloaded JSON
     dcc.Download(id='download-json'),
+    # Store for downloaded HTML
+    dcc.Download(id='download-html'),
     # Store for selected node
     dcc.Store(id='selected-node', data=None),
     # Add store for tracking selected edge
@@ -1252,6 +1255,168 @@ def handle_edge_selection(edge_data, graph_data):
         "source_node": source_node,
         "target_node": target_node
     }
+
+# Add a callback to export the graph as an interactive HTML file
+@app.callback(
+    Output('download-html', 'data'),
+    Input('export-html-btn', 'n_clicks'),
+    [State('cytoscape', 'elements'),
+     State('unified-data-store', 'data')],
+    prevent_initial_call=True
+)
+def export_html(n_clicks, elements, graph_data):
+    if n_clicks is None:
+        return dash.no_update
+    
+    from datetime import datetime
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Process elements to ensure positions are included
+    processed_elements = []
+    for elem in elements:
+        if 'position' in elem:
+            # Keep position information if it exists
+            processed_elements.append(elem)
+        elif elem.get('group') == 'nodes' and 'data' in elem:
+            # For nodes without position, try to get position from the data
+            node_id = elem['data'].get('id')
+            for node in graph_data.get('nodes', []):
+                if node.get('id') == node_id:
+                    if 'position' in node:
+                        elem['position'] = node['position']
+                    break
+            processed_elements.append(elem)
+        else:
+            # Include edges and other elements as is
+            processed_elements.append(elem)
+    
+    # Create a standalone HTML file with the Cytoscape visualization
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Load Path Visualization - {timestamp}</title>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/cytoscape@3.23.0/dist/cytoscape.min.js"></script>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+            }}
+            #header {{
+                background-color: #4CAF50;
+                color: white;
+                padding: 15px;
+                text-align: center;
+            }}
+            #cy {{
+                width: 100%;
+                height: 85vh;
+                display: block;
+            }}
+            #node-info {{
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                background-color: rgba(255, 255, 255, 0.9);
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                max-width: 300px;
+                display: none;
+            }}
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Load Path Visualization</h1>
+            <p>Exported on {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
+        </div>
+        <div id="cy"></div>
+        <div id="node-info"></div>
+        
+        <script>
+            var elements = {json.dumps(processed_elements)};
+            
+            var cy = cytoscape({{
+                container: document.getElementById('cy'),
+                elements: elements,
+                style: [
+                    {{
+                        selector: 'node',
+                        style: {{
+                            'background-color': 'data(color)',
+                            'label': 'data(name)',
+                            'text-valign': 'center',
+                            'text-halign': 'center',
+                            'font-size': '12px',
+                            'color': '#000',
+                            'text-outline-width': 2,
+                            'text-outline-color': '#fff'
+                        }}
+                    }},
+                    {{
+                        selector: 'edge',
+                        style: {{
+                            'width': 3,
+                            'line-color': '#ccc',
+                            'target-arrow-color': '#ccc',
+                            'target-arrow-shape': 'triangle',
+                            'curve-style': 'bezier',
+                            'label': 'data(id)'
+                        }}
+                    }}
+                ],
+                layout: {{
+                    name: 'preset'
+                }}
+            }});
+            
+            // Add event listener to show node data on click
+            const nodeInfo = document.getElementById('node-info');
+            cy.on('tap', 'node', function(evt) {{
+                const node = evt.target;
+                const nodeData = node.data();
+                
+                let html = '<h3>' + (nodeData.name || nodeData.id) + '</h3>';
+                html += '<table>';
+                
+                // Add all node properties to the display
+                for (const [key, value] of Object.entries(nodeData)) {{
+                    if (key !== 'id' && key !== 'name' && key !== 'color') {{
+                        if (Array.isArray(value)) {{
+                            html += '<tr><td><strong>' + key + ':</strong></td><td>' + JSON.stringify(value) + '</td></tr>';
+                        }} else if (typeof value === 'object' && value !== null) {{
+                            html += '<tr><td><strong>' + key + ':</strong></td><td>' + JSON.stringify(value) + '</td></tr>';
+                        }} else {{
+                            html += '<tr><td><strong>' + key + ':</strong></td><td>' + value + '</td></tr>';
+                        }}
+                    }}
+                }}
+                
+                html += '</table>';
+                nodeInfo.innerHTML = html;
+                nodeInfo.style.display = 'block';
+            }});
+            
+            cy.on('tap', function(evt) {{
+                if (evt.target === cy) {{
+                    nodeInfo.style.display = 'none';
+                }}
+            }});
+        </script>
+    </body>
+    </html>
+    """
+    
+    return dict(
+        content=html_content,
+        filename=f"LoadPath_Visualization_{timestamp}.html"
+    )
 
 if __name__ == '__main__':
     app.run_server(port=r'8051', debug=True)
